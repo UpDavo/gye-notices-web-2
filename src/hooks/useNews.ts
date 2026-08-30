@@ -113,6 +113,8 @@ export function useCategories() {
   return useAsync<Category[]>('categories', fetcher);
 }
 
+/* Sin uso hoy: el hero lee `src/data/banners.ts`. Se mantiene porque el
+   endpoint existe y volver a la API es cambiar un import. */
 export function useBanners() {
   const fetcher = useCallback((signal: AbortSignal) => api.banners(signal), []);
   return useAsync<Banner[]>('banners', fetcher);

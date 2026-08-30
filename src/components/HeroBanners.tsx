@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
 import type { Banner } from '../lib/api';
-import { useBanners } from '../hooks/useNews';
+import { HERO_BANNERS } from '../data/banners';
 
 /* El faldón de portada: carrusel de banners definidos en `news/banners.json`
    del backend. Cuántos hay y a qué web va cada uno lo dice su lista `sites`.
@@ -66,7 +66,6 @@ function BannerLink({ banner, className, children }: {
 }
 
 export function HeroBanners() {
-  const { data, loading } = useBanners();
   const reduced = useReducedMotion() ?? false;
 
   const trackRef = useRef<HTMLUListElement>(null);
@@ -79,7 +78,7 @@ export function HeroBanners() {
   const [failed, setFailed] = useState<Record<string, boolean>>({});
   const markFailed = (key: string) => setFailed((prev) => ({ ...prev, [key]: true }));
 
-  const banners = (data ?? []).filter((b) => !failed[b.key]);
+  const banners = HERO_BANNERS.filter((b) => !failed[b.key]);
   const total = banners.length;
 
   const goTo = useCallback((index: number) => {
@@ -126,7 +125,7 @@ export function HeroBanners() {
   }, [reduced, paused, total, goTo]);
 
   // Sin banners no hay faldón: la portada empieza en la nota principal.
-  if (loading || total === 0) return null;
+  if (total === 0) return null;
 
   const arrowClass =
     'hidden md:flex absolute top-1/2 -translate-y-1/2 h-10 w-10 items-center justify-center ' +
