@@ -53,9 +53,9 @@ export function ArticlePage() {
   const { data: article, loading, error, errorCode, reload } = useArticle(slug);
 
   /* Relacionadas: misma sección, sin repetir la que se está leyendo. Se piden
-     cuatro para que sobre una si la actual está en el grupo. */
+     seis para llenar la columna lateral aunque la actual esté en el grupo. */
   const related = useArticles(
-    article?.category ? { category: article.category.slug, page_size: 4 } : { page_size: 4 },
+    article?.category ? { category: article.category.slug, page_size: 6 } : { page_size: 6 },
   );
 
   useEffect(() => {
@@ -113,133 +113,135 @@ export function ArticlePage() {
 
   const relatedArticles = (related.data?.results ?? [])
     .filter((item) => item.slug !== slug)
-    .slice(0, 3);
+    .slice(0, 5);
 
   return (
     <div className="flex flex-col bg-background min-h-screen">
       <Navbar />
 
-      <main className="flex-1">
-        <header className="relative pt-10 pb-8 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="max-w-3xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-8">
-              <Link
-                to="/noticias"
-                className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors no-underline flex items-center gap-1.5"
-              >
-                <ArrowLeft size={14} aria-hidden="true" />
-                Noticias
-              </Link>
-              {article?.category && (
+      <main className="flex-1 px-4 md:px-8 lg:px-12 pt-10">
+        {/* Dos columnas, como la portada: la nota manda y la columna lateral
+            recoge lo demás. A una sola columna centrada esta página quedaba
+            con una mancha estrecha y medio ancho vacío, porque aquí no hay
+            cuerpo de artículo que lo llene. */}
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-10 lg:gap-14">
+          <div className="min-w-0">
+            <header>
+              <div className="flex flex-wrap items-center gap-3 mb-8">
+                <Link
+                  to="/noticias"
+                  className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors no-underline flex items-center gap-1.5"
+                >
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  Noticias
+                </Link>
+                {article?.category && (
+                  <>
+                    <span className="text-muted-foreground/50" aria-hidden="true">/</span>
+                    <Link
+                      to={`/seccion/${article.category.slug}`}
+                      className="text-[11px] font-semibold uppercase tracking-widest text-accent bg-accent/10 rounded-none px-3 py-1 no-underline hover:bg-accent/20 transition-colors"
+                    >
+                      {article.category.name}
+                    </Link>
+                  </>
+                )}
+              </div>
+
+              {loading || !article ? (
+                <div className="animate-pulse flex flex-col gap-4" aria-hidden="true">
+                  <div className="h-9 rounded bg-muted w-full" />
+                  <div className="h-9 rounded bg-muted w-3/4" />
+                  <div className="h-3 rounded bg-muted w-40 mt-2" />
+                </div>
+              ) : (
                 <>
-                  <span className="text-muted-foreground/50" aria-hidden="true">/</span>
-                  <Link
-                    to={`/seccion/${article.category.slug}`}
-                    className="text-[11px] font-semibold uppercase tracking-widest text-accent bg-accent/10 rounded-none px-3 py-1 no-underline hover:bg-accent/20 transition-colors"
-                  >
-                    {article.category.name}
-                  </Link>
+                  <h1 className="font-display font-bold text-3xl md:text-5xl lg:text-[3.2rem] text-foreground leading-[1.06] m-0 mb-5">
+                    {article.title}
+                  </h1>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+                    <SourceCredit article={article} variant="link" />
+                    <span aria-hidden="true">·</span>
+                    <time dateTime={article.published_at} title={formatDateTime(article.published_at)}>
+                      {timeAgo(article.published_at)}
+                    </time>
+                    {article.author && article.author !== article.source.name && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span>{article.author}</span>
+                      </>
+                    )}
+                  </div>
                 </>
               )}
-            </div>
+            </header>
 
-            {loading || !article ? (
-              <div className="animate-pulse flex flex-col gap-4" aria-hidden="true">
-                <div className="h-9 rounded bg-muted w-full" />
-                <div className="h-9 rounded bg-muted w-3/4" />
-                <div className="h-3 rounded bg-muted w-40 mt-2" />
-              </div>
-            ) : (
-              <>
-                <h1 className="font-display font-bold text-3xl md:text-5xl lg:text-[3.2rem] text-foreground leading-[1.06] m-0 mb-5">
-                  {article.title}
-                </h1>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
-                  <SourceCredit article={article} variant="link" />
-                  <span aria-hidden="true">·</span>
-                  <time dateTime={article.published_at} title={formatDateTime(article.published_at)}>
-                    {timeAgo(article.published_at)}
-                  </time>
-                  {article.author && article.author !== article.source.name && (
-                    <>
-                      <span aria-hidden="true">·</span>
-                      <span>{article.author}</span>
-                    </>
-                  )}
-                </div>
-              </>
+            {article?.image_url && !imageFailed && (
+              <figure className="mt-8 mb-10 m-0">
+                <img
+                  src={article.image_url}
+                  alt=""
+                  onError={() => setImageFailedFor(slug ?? null)}
+                  className="w-full max-h-[520px] object-cover rounded-none"
+                />
+                <figcaption className="text-xs text-muted-foreground mt-3">
+                  {article.image_credit || `Imagen: ${article.source.name}`}
+                </figcaption>
+              </figure>
+            )}
+
+            {article && (
+              <article className="pb-4">
+                {/* El extracto se queda en medida de lectura aunque la columna
+                    sea ancha: una línea de 150 caracteres no se lee. */}
+                <p className="dropcap font-body text-lg text-foreground/85 leading-relaxed m-0 mb-10 max-w-[60ch]">
+                  {article.excerpt}
+                </p>
+
+                {/* La salida al medio original. Es el elemento principal de la
+                    página: aquí no hay más texto que leer. */}
+                <SourceCredit article={article} variant="block" className="mb-6" />
+
+                <p className="text-xs text-muted-foreground leading-relaxed m-0 max-w-[70ch]">
+                  El Guayasense es un agregador: reproduce el titular y un extracto breve
+                  con fines informativos y enlaza al artículo completo. Los derechos sobre el
+                  texto y las imágenes pertenecen a {article.source.name}.
+                </p>
+              </article>
             )}
           </div>
-        </header>
 
-        {article?.image_url && !imageFailed && (
-          <div className="px-4 md:px-8 lg:px-12">
-          <figure className="max-w-4xl mx-auto mb-10 m-0">
-            <img
-              src={article.image_url}
-              alt=""
-              onError={() => setImageFailedFor(slug ?? null)}
-              className="w-full max-h-[460px] object-cover rounded-none"
-            />
-            <figcaption className="text-xs text-muted-foreground mt-3 text-center">
-              {article.image_credit || `Imagen: ${article.source.name}`}
-            </figcaption>
-          </figure>
-          </div>
-        )}
-
-        {article && (
-          <div className="px-4 md:px-8 lg:px-12">
-          <article className="max-w-3xl mx-auto pb-4">
-            <p className="dropcap font-body text-lg text-foreground/85 leading-relaxed m-0 mb-10">
-              {article.excerpt}
-            </p>
-
-            {/* La salida al medio original. Es el elemento principal de la
-                página: aquí no hay más texto que leer. */}
-            <SourceCredit article={article} variant="block" className="mb-6" />
-
-            <p className="text-xs text-muted-foreground leading-relaxed m-0">
-              El Guayasense es un agregador: reproduce el titular y un extracto breve
-              con fines informativos y enlaza al artículo completo. Los derechos sobre el
-              texto y las imágenes pertenecen a {article.source.name}.
-            </p>
-          </article>
-          </div>
-        )}
-
-        <section className="px-4 md:px-8 lg:px-12 pt-14 pb-8">
-          <div className="max-w-3xl mx-auto">
+          {/* Columna lateral. Se queda pegada al hacer scroll: la nota es corta,
+              pero la lista de al lado sigue siendo útil al llegar al final. */}
+          <aside className="lg:sticky lg:top-8 lg:self-start">
             <div className="rule-double mb-6" aria-hidden="true" />
             <h2 className="font-display font-bold text-xl text-foreground m-0 mb-6">
               Más de la ciudad
             </h2>
             {related.loading ? (
-              <div className="col-rules grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-0">
+              <div className="flex flex-col gap-5">
                 {Array.from({ length: 3 }, (_, i) => (
                   <CardSkeleton key={i} />
                 ))}
               </div>
             ) : (
-              <div className="col-rules grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-0">
+              <ul className="list-none m-0 p-0 flex flex-col gap-5">
                 {relatedArticles.map((item) => (
-                  <div key={item.slug} className="md:px-4 first:md:pl-0 last:md:pr-0">
-                    <ArticleCard article={item} />
-                  </div>
+                  <li key={item.slug} className="pb-5 border-b border-border last:border-0 last:pb-0">
+                    <ArticleCard article={item} variant="compact" />
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
-            <div className="text-center mt-10">
-              <Link
-                to="/noticias"
-                className="inline-flex items-center gap-2 rounded-none px-7 py-3 text-sm font-semibold border border-border text-foreground no-underline hover:border-accent/50 hover:text-accent transition-colors"
-              >
-                Ver todas las noticias
-                <ArrowRight size={15} aria-hidden="true" />
-              </Link>
-            </div>
-          </div>
-        </section>
+            <Link
+              to="/noticias"
+              className="inline-flex items-center gap-2 mt-8 rounded-none px-6 py-2.5 text-[13px] uppercase tracking-[0.14em] border border-border text-foreground no-underline hover:border-accent/50 hover:text-accent transition-colors"
+            >
+              Toda la edición
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </aside>
+        </div>
       </main>
 
       <Footer />
