@@ -18,6 +18,11 @@ const DIST = join(__dirname, '..', 'dist');
 const SITE_URL = (process.env.SITE_URL || 'https://elguayasense.com').replace(/\/$/, '');
 const OG_IMAGE = `${SITE_URL}/img/og.png`;
 
+/* Con la web tapada por SOON, lo único que vería un rastreador es la portada
+   de espera. Se marca noindex en el build para no gastar rastreo ni dejar
+   indexada una página vacía. */
+const SOON = (process.env.SOON || 'false').toLowerCase() === 'true';
+
 const PAGES = [
   {
     outPath: 'noticias/index.html',
@@ -85,11 +90,18 @@ for (const page of PAGES) {
   html = replaceMeta(html, 'name', 'twitter:title', page.title);
   html = replaceMeta(html, 'name', 'twitter:description', page.description);
   html = replaceMeta(html, 'name', 'twitter:image', OG_IMAGE);
+  if (SOON) html = replaceMeta(html, 'name', 'robots', 'noindex, nofollow');
 
   const outFile = join(DIST, page.outPath);
   mkdirSync(dirname(outFile), { recursive: true });
   writeFileSync(outFile, html, 'utf-8');
   console.log(`[ssg-meta] ✓ ${page.outPath}`);
+}
+
+if (SOON) {
+  const home = join(DIST, 'index.html');
+  writeFileSync(home, replaceMeta(baseHtml, 'name', 'robots', 'noindex, nofollow'), 'utf-8');
+  console.log('[ssg-meta] 🚧 SOON activo: todas las páginas marcadas noindex');
 }
 
 console.log('[ssg-meta] listo. El sitemap y las notas los sirven las Pages Functions.');

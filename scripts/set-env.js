@@ -32,12 +32,21 @@ const siteUrl = (env.SITE_URL ?? 'https://elguayasense.com').replace(/\/$/, '');
 // así que sin este slug la API devolvería también las de la otra.
 const siteSlug = env.SITE_SLUG ?? 'guayaco';
 
+/* Modo «próximamente». Con SOON=true la web entera se sustituye por una
+   portada de espera; SOON_KEY es la clave que deja pasar a quien la tenga.
+   Vive en el bundle, así que es una cortina, no una cerradura: sirve para
+   enseñar el sitio a quien tú quieras, no para proteger nada. */
+const soon = (env.SOON ?? 'false').toLowerCase() === 'true';
+const soonKey = (env.SOON_KEY ?? '').replace(/['"\\]/g, '').trim();
+
 const content = `// Generado automáticamente por scripts/set-env.js — NO editar manualmente.
 export const environment = {
   production: ${env.NODE_ENV === 'production'},
   apiUrl: '${apiUrl}',
   siteUrl: '${siteUrl}',
   siteSlug: '${siteSlug}',
+  soon: ${soon},
+  soonKey: '${soonKey}',
 };
 `;
 
@@ -47,4 +56,9 @@ writeFileSync(outputPath, content);
 
 console.log(
   `✅  environment.ts generado (site: '${siteSlug}', apiUrl: '${apiUrl || '(mismo origen)'}', siteUrl: '${siteUrl}')`,
+);
+console.log(
+  soon
+    ? `🚧  SOON activo${soonKey ? ` — clave: ${soonKey}` : ' — SIN CLAVE: nadie puede entrar'}`
+    : '🟢  SOON desactivado — la web se sirve normal',
 );

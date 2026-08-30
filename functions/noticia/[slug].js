@@ -92,6 +92,11 @@ export async function onRequestGet(context) {
   html = replaceMeta(html, 'name', 'twitter:description', description);
   html = replaceMeta(html, 'name', 'twitter:image', image);
 
+  // Web tapada por SOON: la nota no debe indexarse todavía.
+  if ((env.SOON || 'false').toLowerCase() === 'true') {
+    html = replaceMeta(html, 'name', 'robots', 'noindex, nofollow');
+  }
+
   /* `author` y `publisher` son el MEDIO, no este sitio, e `isBasedOn` apunta al
      artículo original. Decir otra cosa aquí sería atribuirse contenido ajeno
      en los datos estructurados. */

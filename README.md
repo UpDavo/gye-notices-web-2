@@ -55,6 +55,8 @@ Copia `.env.example` a `.env`:
 |---|---|
 | `API_URL` | Base de la API. **Vacío en desarrollo** (lo cubre el proxy de Vite). En Cloudflare, `https://api.guayashoy.com` (la misma API para las dos webs). |
 | `SITE_URL` | Dominio público del sitio. Alimenta canonical, Open Graph y sitemap. |
+| `SOON` | `true` tapa la web entera con la portada de espera. Cualquier otro valor la sirve normal. |
+| `SOON_KEY` | Clave que deja pasar durante `SOON=true`, por formulario o por enlace (`/?acceso=CLAVE`). Va dentro del bundle: es una cortina, no un control de acceso. |
 
 `src/environments/environment.ts` está en `.gitignore`: se genera, no se
 edita. Si tu editor se queja de que no existe, corre `npm run set-env` una vez.
