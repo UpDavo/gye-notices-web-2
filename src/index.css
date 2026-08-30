@@ -1,0 +1,289 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+/* ─── Fuente local ────────────────────────────────────── */
+@font-face {
+  font-family: "AtkinsonHyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AtkinsonHyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AtkinsonHyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AtkinsonHyperlegible";
+  src: url("/fonts/AtkinsonHyperlegible-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Guayaco — Design Tokens ─────────────────────────────
+   Mismo sistema y las mismas primitivas que la web hermana; cambia todo lo
+   demás. Aquello es una web: papel blanco, celeste, aire y esquinas
+   redondeadas. Esto es un periódico impreso: papel crema, tinta negra, rojo de
+   titular, reglas horizontales y CERO esquinas redondeadas.
+
+   Las dos decisiones que hacen el look, y que no se negocian:
+   1. El titular va en serif. Es lo que separa un diario de un blog.
+   2. El radio es 0 en todo. Una esquina redondeada aquí rompe la ilusión de
+      papel más que ningún color.
+──────────────────────────────────────────────────────────── */
+@theme {
+  /* Georgia está en prácticamente cualquier máquina y aguanta bien un titular
+     grande. No se carga ninguna serif por red: un periódico tiene que pintar
+     el titular en el primer frame, no cuando llegue una fuente de un CDN. */
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+  --font-body: "AtkinsonHyperlegible", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-bright: hsl(var(--accent-bright));
+  --color-accent-deep: hsl(var(--accent-deep));
+  --color-border: hsl(var(--border));
+  --color-rule: hsl(var(--rule));
+  --color-ring: hsl(var(--ring));
+  --color-surface: hsl(var(--surface));
+}
+
+:root {
+  /* Rojo de tinta #C0392B. Oscuro por necesidad: sobre papel crema un rojo
+     brillante vibra y cansa a las dos líneas. */
+  --accent: 6 63% 46%;
+  --accent-bright: 6 70% 54%;
+  --accent-deep: 6 60% 32%;
+  --accent-foreground: 40 43% 97%;
+  --ring: 6 63% 46%;
+
+  --primary: 6 63% 46%;
+  --primary-foreground: 40 43% 97%;
+
+  /* Papel crema #FAF7F0 — nunca blanco puro: el blanco puro es una pantalla,
+     el crema es papel. */
+  --background: 40 43% 96%;
+  --foreground: 0 0% 10%;
+
+  /* Papel un tono más hondo, para bloques destacados */
+  --surface: 41 36% 93%;
+  --secondary: 41 36% 93%;
+  --muted: 40 26% 90%;
+  --muted-foreground: 30 6% 38%;
+
+  /* `border` es el marco de una caja; `rule` es la raya horizontal que separa
+     dos notas. En un periódico son dos cosas distintas y la segunda es más
+     oscura, porque es la que estructura la página. */
+  --border: 38 20% 82%;
+  --rule: 30 10% 24%;
+
+  /* Radio 0: esta es la decisión que define el sitio. */
+  --radius: 0px;
+
+  color-scheme: light;
+}
+
+/* ─── Edición nocturna (clase .dark en <html>) ────────
+   El papel se vuelve tinta: marrón muy oscuro, no negro puro, para que siga
+   leyéndose como papel y no como una terminal. El rojo sube de luminosidad —
+   el #C0392B sobre negro se apaga y parece marrón. */
+html.dark {
+  --accent: 6 78% 62%;
+  --accent-bright: 6 84% 70%;
+  --accent-deep: 6 60% 38%;
+  --accent-foreground: 30 12% 8%;
+  --ring: 6 78% 62%;
+
+  --primary: 6 78% 62%;
+  --primary-foreground: 30 12% 8%;
+
+  --background: 30 12% 8%;
+  --foreground: 40 30% 92%;
+
+  --surface: 30 10% 12%;
+  --secondary: 30 10% 12%;
+  --muted: 30 8% 17%;
+  --muted-foreground: 36 8% 62%;
+
+  --border: 30 8% 24%;
+  --rule: 40 20% 78%;
+
+  color-scheme: dark;
+}
+
+/* ─── Base ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  text-align: initial;
+  display: block;
+}
+
+::selection {
+  background: hsl(var(--accent) / 0.18);
+  color: hsl(var(--foreground));
+}
+
+/* En este sitio el foco se dibuja cuadrado: un anillo con esquinas redondeadas
+   sobre una interfaz sin ninguna canta más que el propio foco. */
+:where(a, button, [role="button"], summary, input, textarea, select):focus-visible {
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 2px;
+  border-radius: 0;
+}
+
+/* ─── Textura de papel ───────────────────────────────
+   Un grano finísimo sobre el fondo. Es lo que evita que el crema se lea como
+   un color plano de CSS y lo empuja hacia papel. Va en ::before del body para
+   no ensuciar el DOM, y muy por debajo de todo. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(hsl(30 20% 45% / 0.06) 1px, transparent 1px),
+    radial-gradient(hsl(30 20% 45% / 0.05) 1px, transparent 1px);
+  background-size: 4px 4px, 7px 7px;
+  background-position: 0 0, 2px 3px;
+}
+
+html.dark body::before {
+  opacity: 0.35;
+  background-image:
+    radial-gradient(hsl(40 30% 80% / 0.05) 1px, transparent 1px),
+    radial-gradient(hsl(40 30% 80% / 0.04) 1px, transparent 1px);
+}
+
+/* ─── Reglas de composición ─────────────────────────── */
+/* La raya doble del cabezote: gruesa arriba, fina abajo. Es la firma visual
+   más vieja del periodismo impreso. */
+.rule-double {
+  border-top: 3px solid hsl(var(--rule));
+  border-bottom: 1px solid hsl(var(--rule));
+  height: 4px;
+}
+
+/* Separador entre notas de una misma columna. */
+.rule-thin {
+  border-top: 1px solid hsl(var(--border));
+}
+
+/* Filete corto bajo un titular, al estilo de un ladillo impreso. */
+.rule-kicker::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: hsl(var(--accent));
+  margin-top: 0.75rem;
+}
+
+/* Columnas separadas por línea vertical, como en una página compuesta. */
+@media (min-width: 768px) {
+  .col-rules > * + * {
+    border-left: 1px solid hsl(var(--border));
+  }
+}
+
+/* Capitular: la primera letra del sumario, grande y en serif. */
+.dropcap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  line-height: 0.82;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem 0 0;
+  color: hsl(var(--accent));
+}
+
+/* ─── Recortes de texto ──────────────────────────────── */
+.line-clamp-2,
+.line-clamp-3,
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 { -webkit-line-clamp: 2; }
+.line-clamp-3 { -webkit-line-clamp: 3; }
+.line-clamp-4 { -webkit-line-clamp: 4; }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Cintillo de última hora ────────────────────────── */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 60s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

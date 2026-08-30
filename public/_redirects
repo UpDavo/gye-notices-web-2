@@ -1,0 +1,19 @@
+# Las reglas se evalúan en orden y gana la primera que coincide.
+#
+# `scripts/ssg-meta.mjs` genera un index.html por página fija, con sus meta ya
+# escritos. Sin estas cuatro líneas el comodín de abajo se los tragaría y todas
+# servirían el HTML genérico: Cloudflare sigue los redirects aunque exista un
+# asset que coincida con la ruta.
+#
+# El destino es la ruta "bonita" con barra final, NO `/noticias/index.html`:
+# Cloudflare no expone el archivo directamente y apuntar ahí devuelve vacío.
+/noticias    /noticias/    200
+/medios      /medios/      200
+/privacidad  /privacidad/  200
+/terminos    /terminos/    200
+
+# `/noticia/:slug` y `/sitemap.xml` NO aparecen aquí: los sirven las Pages
+# Functions, y Cloudflare no aplica los redirects a lo que sirve una Function.
+
+# Resto de rutas del SPA.
+/*           /index.html   200
