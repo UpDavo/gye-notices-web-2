@@ -10,15 +10,15 @@ export function TermsPage() {
       title="Términos y condiciones"
       updated={UPDATED}
       path="/terminos"
-      seoTitle="Términos y condiciones — Guayaco"
-      seoDescription="Condiciones de uso de Guayaco, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios."
-      intro="Al usar Guayaco aceptas estas condiciones. La más importante cabe en una línea: el contenido no es nuestro, y por eso siempre te llevamos a quien lo escribió."
+      seoTitle="Términos y condiciones — El Guayasense"
+      seoDescription="Condiciones de uso de El Guayasense, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios."
+      intro="Al usar El Guayasense aceptas estas condiciones. La más importante cabe en una línea: el contenido no es nuestro, y por eso siempre te llevamos a quien lo escribió."
       sections={[
         {
           title: '1. Qué es este sitio',
           body: (
             <p className="m-0">
-              Guayaco es un agregador. Reunimos titulares y extractos breves
+              El Guayasense es un agregador. Reunimos titulares y extractos breves
               publicados por medios de comunicación, indicamos siempre el medio de origen y
               enlazamos a su artículo completo. No somos un medio de comunicación ni
               elaboramos contenido periodístico.
@@ -62,11 +62,14 @@ export function TermsPage() {
           body: (
             <p className="m-0">
               Cualquier medio puede pedir que dejemos de mostrar su contenido y lo retiramos
-              el mismo día, sin condiciones ni contrapartidas. Basta con escribir a{' '}
-              <a href="mailto:hola@guayaco.ec" className="text-accent no-underline hover:underline">
-                hola@guayaco.ec
+              el mismo día, sin condiciones ni contrapartidas.
+              {/* Sin canal de contacto público: no hay formulario ni correo de contacto.
+              Basta con escribir a{' '}
+              <a href="mailto:hola@elguayasense.com" className="text-accent no-underline hover:underline">
+                hola@elguayasense.com
               </a>{' '}
               desde un correo del medio.
+              */}
             </p>
           ),
         },

@@ -1,4 +1,4 @@
-# Guayaco — Sistema de Diseño
+# El Guayasense — Sistema de Diseño
 
 Periódico impreso. Papel crema, tinta negra, rojo de titular, serif, reglas
 horizontales y **cero esquinas redondeadas**.

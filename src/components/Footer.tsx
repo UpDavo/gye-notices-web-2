@@ -32,7 +32,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
           <div className="col-span-2 md:col-span-1">
             <p className="font-display font-bold text-4xl text-foreground leading-none m-0">
-              Guayaco
+              El Guayasense
             </p>
             <p className="text-[10px] uppercase tracking-[0.3em] text-accent mt-2 m-0">
               El diario de Guayaquil
@@ -69,7 +69,7 @@ export function Footer() {
         <div className="rule-double my-8" aria-hidden="true" />
 
         <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground m-0">
-          © {YEAR} Guayaco
+          © {YEAR} El Guayasense
         </p>
       </div>
     </footer>

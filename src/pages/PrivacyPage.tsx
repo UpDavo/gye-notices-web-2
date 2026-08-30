@@ -10,15 +10,15 @@ export function PrivacyPage() {
       title="Política de privacidad"
       updated={UPDATED}
       path="/privacidad"
-      seoTitle="Política de privacidad — Guayaco"
-      seoDescription="Qué datos recoge Guayaco y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador."
-      intro="Guayaco no pide registro ni recoge datos personales para funcionar. Esta página explica lo poco que sí se guarda y por qué."
+      seoTitle="Política de privacidad — El Guayasense"
+      seoDescription="Qué datos recoge El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador."
+      intro="El Guayasense no pide registro ni recoge datos personales para funcionar. Esta página explica lo poco que sí se guarda y por qué."
       sections={[
         {
           title: '1. Quiénes somos',
           body: (
             <p className="m-0">
-              Guayaco es un agregador de noticias de la ciudad. Reunimos titulares
+              El Guayasense es un agregador de noticias de la ciudad. Reunimos titulares
               y extractos publicados por medios de comunicación y enlazamos a sus artículos
               originales. No producimos contenido periodístico propio.
             </p>
@@ -46,7 +46,7 @@ export function PrivacyPage() {
             <>
               <p className="m-0">
                 Usamos <code>localStorage</code>, no cookies de seguimiento. Se guardan dos
-                valores: <code>guayaco-theme</code> (claro u oscuro) y <code>cookie_consent</code>{' '}
+                valores: <code>elguayasense-theme</code> (claro u oscuro) y <code>cookie_consent</code>{' '}
                 (si ya viste el aviso).
               </p>
               <p className="m-0">
@@ -90,11 +90,14 @@ export function PrivacyPage() {
               La Ley Orgánica de Protección de Datos Personales del Ecuador te da derecho de
               acceso, rectificación, eliminación y oposición sobre tus datos personales. Como
               no tratamos datos que te identifiquen, en la práctica no hay nada que rectificar
-              ni eliminar; aun así, si tienes una consulta escríbenos a{' '}
-              <a href="mailto:hola@guayaco.ec" className="text-accent no-underline hover:underline">
-                hola@guayaco.ec
+              ni eliminar.
+              {/* Sin canal de contacto público: no hay formulario ni correo de contacto.
+              , aun así, si tienes una consulta escríbenos a{' '}
+              <a href="mailto:hola@elguayasense.com" className="text-accent no-underline hover:underline">
+                hola@elguayasense.com
               </a>
               .
+              */}
             </p>
           ),
         },

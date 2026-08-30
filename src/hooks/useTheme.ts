@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
-const STORAGE_KEY = 'guayaco-theme';
+const STORAGE_KEY = 'elguayasense-theme';
 
 /** Lee el tema del <html> (lo aplica el script inline de index.html antes del paint). */
 function currentTheme(): Theme {

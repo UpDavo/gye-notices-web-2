@@ -65,7 +65,7 @@ export function ArticlePage() {
   usePageSeo(
     article
       ? {
-          title: `${article.title} — Guayaco`,
+          title: `${article.title} — El Guayasense`,
           description: article.excerpt,
           path: `/noticia/${article.slug}`,
           image: article.image_url || undefined,
@@ -200,7 +200,7 @@ export function ArticlePage() {
             <SourceCredit article={article} variant="block" className="mb-6" />
 
             <p className="text-xs text-muted-foreground leading-relaxed m-0">
-              Guayaco es un agregador: reproduce el titular y un extracto breve
+              El Guayasense es un agregador: reproduce el titular y un extracto breve
               con fines informativos y enlaza al artículo completo. Los derechos sobre el
               texto y las imágenes pertenecen a {article.source.name}.
             </p>

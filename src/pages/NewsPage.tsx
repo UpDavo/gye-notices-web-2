@@ -45,7 +45,7 @@ export function NewsPage() {
     setParams(updated);
   }
 
-  const title = query ? `Búsqueda: ${query} — Guayaco` : 'Todas las noticias — Guayaco';
+  const title = query ? `Búsqueda: ${query} — El Guayasense` : 'Todas las noticias — El Guayasense';
 
   usePageSeo({
     title,

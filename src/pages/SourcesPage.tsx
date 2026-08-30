@@ -37,9 +37,9 @@ export function SourcesPage() {
   const { data: sources } = useSources();
 
   usePageSeo({
-    title: 'Medios y cómo trabajamos — Guayaco',
+    title: 'Medios y cómo trabajamos — El Guayasense',
     description:
-      'De qué medios sale el contenido de Guayaco y con qué reglas se agrega: solo titular y extracto, enlace al original y salida inmediata a petición.',
+      'De qué medios sale el contenido de El Guayasense y con qué reglas se agrega: solo titular y extracto, enlace al original y salida inmediata a petición.',
     path: '/medios',
   });
 
@@ -55,7 +55,7 @@ export function SourcesPage() {
               De dónde sale todo esto.
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed m-0">
-              Guayaco no produce noticias. Reúne lo que publican los medios de
+              El Guayasense no produce noticias. Reúne lo que publican los medios de
               la ciudad y del país, y manda al lector de vuelta a ellos.
             </p>
           </header>
@@ -104,6 +104,7 @@ export function SourcesPage() {
             </div>
           </section>
 
+          {/* Sin canal de contacto público: no hay formulario ni correo de contacto.
           <section className="rounded-none border border-border bg-surface p-8 md:p-10 mb-8 text-center">
             <h2 className="font-display font-bold text-2xl text-foreground tracking-tight m-0 mb-3">
               ¿Eres de un medio?
@@ -113,12 +114,13 @@ export function SourcesPage() {
               frecuencia, o si quieres que tu medio aparezca aquí.
             </p>
             <a
-              href="mailto:hola@guayaco.ec"
+              href="mailto:hola@elguayasense.com"
               className="inline-block rounded-none px-8 py-2.5 text-[13px] uppercase tracking-[0.14em] bg-accent text-white no-underline hover:opacity-90 transition-opacity"
             >
-              hola@guayaco.ec
+              hola@elguayasense.com
             </a>
           </section>
+          */}
         </div>
       </main>
 

@@ -26,7 +26,7 @@ const env = process.env;
 
 // API_URL vacío = mismo origen. En desarrollo lo cubre el proxy de Vite.
 const apiUrl = (env.API_URL ?? '').replace(/\/$/, '');
-const siteUrl = (env.SITE_URL ?? 'https://guayaco.ec').replace(/\/$/, '');
+const siteUrl = (env.SITE_URL ?? 'https://elguayasense.com').replace(/\/$/, '');
 
 // Qué web es esta. El backend alimenta varias y reparte las notas entre ellas,
 // así que sin este slug la API devolvería también las de la otra.

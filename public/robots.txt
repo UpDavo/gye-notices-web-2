@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /noticias?q=
 
-Sitemap: https://guayaco.ec/sitemap.xml
+Sitemap: https://elguayasense.com/sitemap.xml

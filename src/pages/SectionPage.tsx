@@ -34,7 +34,7 @@ export function SectionPage() {
   );
 
   usePageSeo({
-    title: `${name} — Guayaco`,
+    title: `${name} — El Guayasense`,
     description:
       category?.description ||
       `Noticias de ${name} publicadas por los medios de Guayaquil, con crédito y enlace al original.`,
@@ -43,7 +43,7 @@ export function SectionPage() {
       ? {
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: `${name} — Guayaco`,
+          name: `${name} — El Guayasense`,
           url: `${SITE_URL}/seccion/${slug}`,
           inLanguage: 'es-EC',
           mainEntity: {

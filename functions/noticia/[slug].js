@@ -74,7 +74,7 @@ export async function onRequestGet(context) {
   }
 
   const url = `${siteUrl}/noticia/${article.slug}`;
-  const title = `${article.title} — Guayaco`;
+  const title = `${article.title} — El Guayasense`;
   const description = article.excerpt || `Publicado por ${article.source.name}.`;
   const image = article.image_url || `${siteUrl}/img/og.png`;
 

@@ -1,4 +1,4 @@
-# Guayaco — web2
+# El Guayasense — web2
 
 Frontend del segundo diario. Mismo stack que la web hermana — Vite + React 19 +
 TypeScript + Tailwind v4 + framer-motion — y las mismas primitivas, pero
@@ -53,7 +53,7 @@ Copia `.env.example` a `.env`:
 
 | Variable | Para qué |
 |---|---|
-| `API_URL` | Base de la API. **Vacío en desarrollo** (lo cubre el proxy de Vite). En Cloudflare, la URL pública del backend. |
+| `API_URL` | Base de la API. **Vacío en desarrollo** (lo cubre el proxy de Vite). En Cloudflare, `https://api.guayashoy.com` (la misma API para las dos webs). |
 | `SITE_URL` | Dominio público del sitio. Alimenta canonical, Open Graph y sitemap. |
 
 `src/environments/environment.ts` está en `.gitignore`: se genera, no se
@@ -175,8 +175,8 @@ Es un sitio estático (`dist/`) más dos Pages Functions.
 **Variables de entorno del proyecto**
 
 ```
-API_URL   = https://<tu-backend>
-SITE_URL  = https://guayaco.ec
+API_URL   = https://api.guayashoy.com
+SITE_URL  = https://elguayasense.com
 ```
 
 Las dos se usan **dos veces** y por eso basta declararlas una vez en el
@@ -187,7 +187,7 @@ sitemap.
 **El backend tiene que permitir el origen.** En el servicio de Django:
 
 ```
-CORS_ALLOWED_ORIGINS=https://guayaco.ec
+CORS_ALLOWED_ORIGINS=https://guayashoy.com,https://elguayasense.com
 ```
 
 ### `public/_redirects`

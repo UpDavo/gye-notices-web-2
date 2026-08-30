@@ -7,7 +7,7 @@ import { NewsFeedSection } from '../components/sections/NewsFeedSection';
 import { usePageSeo } from '../hooks/usePageSeo';
 import { SITE_URL } from '../lib/api';
 
-const TITLE = 'Guayaco | El diario de Guayaquil';
+const TITLE = 'El Guayasense | El diario de Guayaquil';
 const DESCRIPTION =
   'Las noticias de Guayaquil de los principales medios de la ciudad, reunidas en una sola edición. Titulares, extracto y enlace directo al medio que las publicó.';
 
@@ -25,7 +25,7 @@ export function HomePage() {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       '@id': `${SITE_URL}/#website`,
-      name: 'Guayaco',
+      name: 'El Guayasense',
       url: SITE_URL,
       description: DESCRIPTION,
       inLanguage: 'es-EC',

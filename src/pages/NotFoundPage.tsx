@@ -5,7 +5,7 @@ import { usePageSeo } from '../hooks/usePageSeo';
 
 export function NotFoundPage() {
   usePageSeo({
-    title: 'Página no encontrada — Guayaco',
+    title: 'Página no encontrada — El Guayasense',
     description: 'La página que buscas no existe.',
     path: '/404',
     noIndex: true,

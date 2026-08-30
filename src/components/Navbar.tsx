@@ -57,10 +57,10 @@ export function Navbar() {
             <Link
               to="/"
               className="no-underline text-center shrink-0"
-              aria-label="Guayaco — portada"
+              aria-label="El Guayasense — portada"
             >
-              <span className="block font-display font-bold text-foreground leading-[0.85] tracking-tight text-[2.75rem] md:text-6xl lg:text-7xl">
-                Guayaco
+              <span className="block font-display font-bold text-foreground leading-[0.85] tracking-tight text-[2rem] sm:text-[2.75rem] md:text-5xl lg:text-6xl">
+                El Guayasense
               </span>
               <span className="block text-[10px] md:text-[11px] uppercase tracking-[0.34em] text-accent mt-2">
                 El diario de Guayaquil
@@ -124,7 +124,7 @@ export function Navbar() {
               to="/"
               className="hidden md:block shrink-0 font-display font-bold text-base text-foreground no-underline hover:text-accent transition-colors"
             >
-              Guayaco
+              El Guayasense
             </Link>
             <span className="hidden md:block h-4 w-px bg-border shrink-0" aria-hidden="true" />
 

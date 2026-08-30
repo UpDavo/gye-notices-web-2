@@ -15,13 +15,13 @@ import 'dotenv/config';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIST = join(__dirname, '..', 'dist');
 
-const SITE_URL = (process.env.SITE_URL || 'https://guayaco.ec').replace(/\/$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://elguayasense.com').replace(/\/$/, '');
 const OG_IMAGE = `${SITE_URL}/img/og.png`;
 
 const PAGES = [
   {
     outPath: 'noticias/index.html',
-    title: 'Todas las noticias — Guayaco',
+    title: 'Todas las noticias — El Guayasense',
     description:
       'La edición completa: todo lo que publican los medios de Guayaquil, con crédito y enlace al artículo original.',
     canonical: `${SITE_URL}/noticias`,
@@ -29,25 +29,25 @@ const PAGES = [
   },
   {
     outPath: 'medios/index.html',
-    title: 'Medios y cómo trabajamos — Guayaco',
+    title: 'Medios y cómo trabajamos — El Guayasense',
     description:
-      'De qué medios sale el contenido de Guayaco y con qué reglas se agrega: solo titular y extracto, enlace al original y salida inmediata a petición.',
+      'De qué medios sale el contenido de El Guayasense y con qué reglas se agrega: solo titular y extracto, enlace al original y salida inmediata a petición.',
     canonical: `${SITE_URL}/medios`,
     ogType: 'website',
   },
   {
     outPath: 'privacidad/index.html',
-    title: 'Política de privacidad — Guayaco',
+    title: 'Política de privacidad — El Guayasense',
     description:
-      'Qué datos recoge Guayaco y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.',
+      'Qué datos recoge El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.',
     canonical: `${SITE_URL}/privacidad`,
     ogType: 'article',
   },
   {
     outPath: 'terminos/index.html',
-    title: 'Términos y condiciones — Guayaco',
+    title: 'Términos y condiciones — El Guayasense',
     description:
-      'Condiciones de uso de Guayaco, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios.',
+      'Condiciones de uso de El Guayasense, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios.',
     canonical: `${SITE_URL}/terminos`,
     ogType: 'article',
   },
