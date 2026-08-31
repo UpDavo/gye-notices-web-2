@@ -2,8 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useReducedMotion } from 'framer-motion';
-import type { Banner } from '../lib/api';
-import { HERO_BANNERS } from '../data/banners';
+import { HERO_BANNERS, type Banner } from '../data/banners';
 
 /* El faldón de portada: carrusel de banners definidos en `news/banners.json`
    del backend. Cuántos hay y a qué web va cada uno lo dice su lista `sites`.

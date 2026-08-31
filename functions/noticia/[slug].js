@@ -53,8 +53,18 @@ async function fetchArticle(apiUrl, slug, siteSlug) {
   }
 }
 
+/* Cloudflare NO cachea por su cuenta lo que devuelve una Function: sale como
+ * `cf-cache-status: DYNAMIC` por mucho `s-maxage` que lleve la respuesta. Hay
+ * que guardarla a mano en la Cache API. Sin esto, una nota que se comparte y
+ * recibe mil visitas son mil consultas a la API — justo el caso en el que la
+ * portada del medio ya está saturada.
+ */
 export async function onRequestGet(context) {
   const { request, env, params } = context;
+
+  const cache = caches.default;
+  const cached = await cache.match(request);
+  if (cached) return cached;
 
   const apiUrl = (env.API_URL || '').replace(/\/$/, '');
   const siteUrl = (env.SITE_URL || new URL(request.url).origin).replace(/\/$/, '');
@@ -120,7 +130,7 @@ export async function onRequestGet(context) {
     `  <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>\n  </head>`,
   );
 
-  return new Response(html, {
+  const response = new Response(html, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       // Cinco minutos en el borde: suficiente para absorber una nota que se
@@ -128,4 +138,16 @@ export async function onRequestGet(context) {
       'Cache-Control': 'public, max-age=0, s-maxage=300',
     },
   });
+
+  /* Solo se guarda la página con los meta ya resueltos. La caída al HTML base
+   * de más arriba sale con `no-cache` y no pasa por aquí a propósito: si la API
+   * tuvo un mal minuto, ese error no debe quedarse pegado cinco minutos en el
+   * borde para todo el que abra la nota.
+   *
+   * `waitUntil` deja que la escritura ocurra después de responder, así que el
+   * lector que provoca el MISS no paga el guardado.
+   */
+  context.waitUntil(cache.put(request, response.clone()));
+
+  return response;
 }

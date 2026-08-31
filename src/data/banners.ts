@@ -7,12 +7,23 @@
    corto y no puede fallar a medias.
 
    Las imágenes viven en `public/img/` de esta misma web, así que se referencian
-   por ruta absoluta del sitio. Si algún día hacen falta banners por campaña o
-   con ventana de fechas, el backend ya tiene el modelo y el endpoint
-   (`/api/news/banners/`, `news/banners.json`, `seed_banners`) — se vuelve a
-   conectar cambiando el import de `HeroBanners`. */
+   por ruta absoluta del sitio.
 
-import type { Banner } from '../lib/api';
+   El backend NO tiene banners: el modelo, el endpoint y `seed_banners` se
+   borraron porque nadie los consumía. Si algún día hacen falta banners por
+   campaña o con ventana de fechas, se vuelven a crear allí; hoy sobraban. */
+
+export type Banner = {
+  key: string;
+  title: string;
+  subtitle: string;
+  alt: string;
+  image_url: string;
+  image_url_mobile: string;
+  link_url: string;
+  open_in_new_tab: boolean;
+  order: number;
+};
 
 export const HERO_BANNERS: Banner[] = [
   {

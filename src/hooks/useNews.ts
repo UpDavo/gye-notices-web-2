@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError } from '../lib/api';
-import type { Article, ArticleQuery, Banner, Category, Paginated, Source } from '../lib/api';
+import type { Article, ArticleQuery, Category, Paginated, Source } from '../lib/api';
 
 type Loaded<T> = {
   /* Qué petición produjo estos datos. Comparar esta clave con la clave pedida
@@ -98,9 +98,12 @@ export function useArticle(slug: string | undefined) {
   return useAsync<Article>(`article:${slug ?? ''}`, fetcher);
 }
 
-export function useFeatured() {
-  const fetcher = useCallback((signal: AbortSignal) => api.featured(signal), []);
-  return useAsync<{ results: Article[] }>('featured', fetcher);
+/* La portada. El backend devuelve lo destacado y, si no hay nada destacado,
+   lo más reciente — así que esta sola petición basta para armar la sección y
+   no hace falta pedir además el listado. */
+export function useFeatured(limit = 6) {
+  const fetcher = useCallback((signal: AbortSignal) => api.featured(limit, signal), [limit]);
+  return useAsync<{ results: Article[] }>(`featured:${limit}`, fetcher);
 }
 
 export function useLatest(limit = 12) {
@@ -111,13 +114,6 @@ export function useLatest(limit = 12) {
 export function useCategories() {
   const fetcher = useCallback((signal: AbortSignal) => api.categories(signal), []);
   return useAsync<Category[]>('categories', fetcher);
-}
-
-/* Sin uso hoy: el hero lee `src/data/banners.ts`. Se mantiene porque el
-   endpoint existe y volver a la API es cambiar un import. */
-export function useBanners() {
-  const fetcher = useCallback((signal: AbortSignal) => api.banners(signal), []);
-  return useAsync<Banner[]>('banners', fetcher);
 }
 
 export function useSources() {

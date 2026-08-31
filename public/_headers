@@ -1,0 +1,27 @@
+# Cabeceras de seguridad y caché. Cloudflare Pages las aplica a lo que sirve
+# como asset estático; lo que devuelve una Pages Function pone las suyas.
+
+/*
+  # HSTS: dos años, subdominios incluidos. Sin `preload` a propósito — entrar
+  # en la lista de los navegadores es fácil y salir tarda meses.
+  Strict-Transport-Security: max-age=63072000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+  # `img-src https:` es ancho a propósito: las fotos las sirve el CDN de cada
+  # medio y no se puede listar de antemano quién publicará mañana.
+  # `script-src` lleva 'unsafe-inline' por el script de tema que va en el
+  # <head> y por el JSON-LD. Apretar esto a hashes es el siguiente paso.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src 'self' https://api.guayashoy.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'
+
+# Vite les pone un hash en el nombre: si cambia el contenido, cambia la URL.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=604800

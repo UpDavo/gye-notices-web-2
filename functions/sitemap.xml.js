@@ -27,8 +27,16 @@ async function fetchSitemapData(apiUrl, siteSlug) {
   }
 }
 
+/* Igual que la Function de nota: Cloudflare no cachea sola lo que devuelve una
+ * Function, hay que guardarlo en la Cache API. Aquí pesa más todavía, porque
+ * cada sitemap lleva cientos de notas y lo piden los rastreadores en ráfaga.
+ */
 export async function onRequestGet(context) {
   const { request, env } = context;
+
+  const cache = caches.default;
+  const cached = await cache.match(request);
+  if (cached) return cached;
 
   const apiUrl = (env.API_URL || '').replace(/\/$/, '');
   const siteUrl = (env.SITE_URL || new URL(request.url).origin).replace(/\/$/, '');
@@ -65,7 +73,7 @@ export async function onRequestGet(context) {
     )
     .join('\n');
 
-  return new Response(
+  const response = new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>`,
     {
       headers: {
@@ -74,4 +82,11 @@ export async function onRequestGet(context) {
       },
     },
   );
+
+  // Solo si la API respondió. Un sitemap con las páginas fijas y ninguna nota
+  // es válido pero está incompleto, y cachearlo quince minutos se lo daría así
+  // a Google.
+  if (data) context.waitUntil(cache.put(request, response.clone()));
+
+  return response;
 }

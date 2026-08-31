@@ -22,18 +22,6 @@ export type Site = {
   description: string;
 };
 
-export type Banner = {
-  key: string;
-  title: string;
-  subtitle: string;
-  alt: string;
-  image_url: string;
-  image_url_mobile: string;
-  link_url: string;
-  open_in_new_tab: boolean;
-  order: number;
-};
-
 export type Source = {
   slug: string;
   name: string;
@@ -154,8 +142,8 @@ export const api = {
   article: (slug: string, signal?: AbortSignal) =>
     request<Article>(`/news/articles/${slug}/`, undefined, signal),
 
-  featured: (signal?: AbortSignal) =>
-    request<{ results: Article[] }>('/news/articles/featured/', undefined, signal),
+  featured: (limit = 6, signal?: AbortSignal) =>
+    request<{ results: Article[] }>('/news/articles/featured/', { limit }, signal),
 
   latest: (limit = 12, signal?: AbortSignal) =>
     request<{ results: Article[] }>('/news/articles/latest/', { limit }, signal),
@@ -165,7 +153,4 @@ export const api = {
 
   sources: (signal?: AbortSignal) =>
     request<Source[]>('/news/sources/', undefined, signal),
-
-  banners: (signal?: AbortSignal) =>
-    request<Banner[]>('/news/banners/', undefined, signal),
 };
