@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LegalPage } from './LegalPage';
+import { environment } from '../environments/environment';
 
 const UPDATED = '29 de agosto de 2026';
 
@@ -62,14 +63,11 @@ export function TermsPage() {
           body: (
             <p className="m-0">
               Cualquier medio puede pedir que dejemos de mostrar su contenido y lo retiramos
-              el mismo día, sin condiciones ni contrapartidas.
-              {/* Sin canal de contacto público: no hay formulario ni correo de contacto.
-              Basta con escribir a{' '}
-              <a href="mailto:hola@elguayasense.com" className="text-accent no-underline hover:underline">
-                hola@elguayasense.com
+              el mismo día, sin condiciones ni contrapartidas. Basta con escribir a{' '}
+              <a href={`mailto:${environment.contactEmail}`} className="text-accent no-underline hover:underline">
+                {environment.contactEmail}
               </a>{' '}
               desde un correo del medio.
-              */}
             </p>
           ),
         },

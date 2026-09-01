@@ -30,6 +30,11 @@ const siteUrl = (env.SITE_URL ?? 'https://elguayasense.com').replace(/\/$/, '');
 
 // Qué web es esta. El backend alimenta varias y reparte las notas entre ellas,
 // así que sin este slug la API devolvería también las de la otra.
+/* Correo público de contacto. No hay formulario en ninguna página: el canal
+   es un `mailto:` y nada más, así que este valor es el único punto donde se
+   escribe la dirección. Cada web tiene la suya, en su propio dominio. */
+const contactEmail = (env.CONTACT_EMAIL ?? 'contacto@elguayasense.com').trim();
+
 const siteSlug = env.SITE_SLUG ?? 'guayaco';
 
 /* Modo «próximamente». Con SOON=true la web entera se sustituye por una
@@ -45,6 +50,7 @@ export const environment = {
   apiUrl: '${apiUrl}',
   siteUrl: '${siteUrl}',
   siteSlug: '${siteSlug}',
+  contactEmail: '${contactEmail}',
   soon: ${soon},
   soonKey: '${soonKey}',
 };

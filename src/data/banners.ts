@@ -27,6 +27,17 @@ export type Banner = {
 
 export const HERO_BANNERS: Banner[] = [
   {
+    key: 'skyline-atardecer',
+    title: 'Guayaquil al atardecer',
+    subtitle: 'La ciudad, contada cada día.',
+    alt: 'Vista aérea de Guayaquil al atardecer, con el cerro Santa Ana y las torres de Puerto Santa Ana',
+    image_url: '/img/banner-skyline.jpg',
+    image_url_mobile: '/img/banner-skyline-mobile.jpg',
+    link_url: '',
+    open_in_new_tab: false,
+    order: 5,
+  },
+  {
     key: 'hero-principal',
     title: 'Guayaquil, al día',
     subtitle: 'Lo que publican los medios de la ciudad, reunido en un solo lugar.',

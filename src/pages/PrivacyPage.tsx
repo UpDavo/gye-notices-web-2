@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { LegalPage } from './LegalPage';
+import { environment } from '../environments/environment';
 
 const UPDATED = '29 de agosto de 2026';
 
@@ -90,14 +91,11 @@ export function PrivacyPage() {
               La Ley Orgánica de Protección de Datos Personales del Ecuador te da derecho de
               acceso, rectificación, eliminación y oposición sobre tus datos personales. Como
               no tratamos datos que te identifiquen, en la práctica no hay nada que rectificar
-              ni eliminar.
-              {/* Sin canal de contacto público: no hay formulario ni correo de contacto.
-              , aun así, si tienes una consulta escríbenos a{' '}
-              <a href="mailto:hola@elguayasense.com" className="text-accent no-underline hover:underline">
-                hola@elguayasense.com
+              ni eliminar. Aun así, si tienes una consulta escríbenos a{' '}
+              <a href={`mailto:${environment.contactEmail}`} className="text-accent no-underline hover:underline">
+                {environment.contactEmail}
               </a>
               .
-              */}
             </p>
           ),
         },
