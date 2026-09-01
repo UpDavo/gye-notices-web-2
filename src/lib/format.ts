@@ -43,3 +43,10 @@ export function timeAgo(value: string): string {
 export function isoDate(value: string): string {
   return new Date(value).toISOString().split('T')[0];
 }
+
+/* El extracto viene con los párrafos separados por una línea en blanco. La
+   página de la nota los respeta, pero una meta description o un JSON-LD con
+   saltos dentro es texto sucio para el buscador: ahí se aplana a una línea. */
+export function singleLine(text: string): string {
+  return text.replace(/\s+/g, ' ').trim();
+}

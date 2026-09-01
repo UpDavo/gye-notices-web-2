@@ -8,7 +8,7 @@ import { SourceCredit } from '../components/news/SourceCredit';
 import { CardSkeleton, ErrorState } from '../components/news/States';
 import { useArticle, useArticles } from '../hooks/useNews';
 import { usePageSeo } from '../hooks/usePageSeo';
-import { formatDateTime, timeAgo } from '../lib/format';
+import { formatDateTime, timeAgo, singleLine } from '../lib/format';
 import { SITE_URL } from '../lib/api';
 
 /* La página de una nota.
@@ -66,7 +66,7 @@ export function ArticlePage() {
     article
       ? {
           title: `${article.title} — El Guayasense`,
-          description: article.excerpt,
+          description: singleLine(article.excerpt),
           path: `/noticia/${article.slug}`,
           image: article.image_url || undefined,
           type: 'article',
@@ -74,7 +74,7 @@ export function ArticlePage() {
             '@context': 'https://schema.org',
             '@type': 'NewsArticle',
             headline: article.title,
-            description: article.excerpt,
+            description: singleLine(article.excerpt),
             datePublished: article.published_at,
             image: article.image_url || `${SITE_URL}/img/og.png`,
             articleSection: article.category?.name,
@@ -193,8 +193,13 @@ export function ArticlePage() {
             {article && (
               <article className="pb-4">
                 {/* El extracto se queda en medida de lectura aunque la columna
-                    sea ancha: una línea de 150 caracteres no se lee. */}
-                <p className="dropcap font-body text-lg text-foreground/85 leading-relaxed m-0 mb-10 max-w-[60ch]">
+                    sea ancha: una línea de 150 caracteres no se lee.
+
+                    `whitespace-pre-line` es lo que hace que los párrafos que
+                    trajo el scraper se vean como párrafos: vienen separados por
+                    una línea en blanco y el HTML, por defecto, los colapsaría
+                    en un bloque corrido. */}
+                <p className="dropcap whitespace-pre-line font-body text-lg text-foreground/85 leading-relaxed m-0 mb-10 max-w-[60ch]">
                   {article.excerpt}
                 </p>
 
