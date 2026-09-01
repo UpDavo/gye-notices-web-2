@@ -13,9 +13,8 @@ import { useCategories } from '../hooks/useNews';
    que flota sobre la página rompería la ilusión de papel antes que ninguna
    otra cosa.
 
-   Al bajar, la mancheta se retira y queda pegada arriba solo la barra de
-   secciones, con el nombre en pequeño: es la versión condensada que usan los
-   diarios en sus páginas interiores. */
+   El cabezote no se pega arriba: se va con el scroll, como la primera plana de
+   un diario que se pasa de página. */
 
 const FECHA = new Date().toLocaleDateString('es-EC', {
   weekday: 'long',
@@ -113,21 +112,13 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* ── Barra de secciones, pegada arriba al bajar ── */}
+      {/* ── Barra de secciones ── */}
       <nav
         aria-label="Secciones"
-        className="sticky top-0 z-50 bg-background border-b border-[hsl(var(--rule))]"
+        className="bg-background border-b border-[hsl(var(--rule))]"
       >
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex items-center gap-5 h-11 overflow-x-auto no-scrollbar">
-            <Link
-              to="/"
-              className="hidden md:block shrink-0 font-display font-bold text-base text-foreground no-underline hover:text-accent transition-colors"
-            >
-              El Guayasense
-            </Link>
-            <span className="hidden md:block h-4 w-px bg-border shrink-0" aria-hidden="true" />
-
             <Link
               to="/noticias"
               className="shrink-0 text-[13px] uppercase tracking-[0.12em] text-foreground no-underline hover:text-accent transition-colors"

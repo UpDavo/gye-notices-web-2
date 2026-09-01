@@ -42,33 +42,20 @@ function Byline({ article }: { article: Article }) {
   );
 }
 
-/* Un medio puede no traer foto: los feeds de WordPress casi nunca la traen, y
-   las fotos de terceros fallan por motivos que este sitio no controla. En vez
-   de un hueco gris se pinta una trama de líneas diagonales — el gris de
-   imprenta con el que un diario rellena un espacio sin material. */
-function Fallback({ article, label = true }: { article: Article; label?: boolean }) {
-  return (
-    <div
-      className="relative h-full w-full flex items-end p-2 bg-muted"
-      style={{
-        backgroundImage:
-          'repeating-linear-gradient(45deg, hsl(var(--rule) / 0.13) 0 1px, transparent 1px 7px)',
-      }}
-    >
-      {label && (
-        <span className="font-display font-bold text-[11px] uppercase tracking-[0.14em] text-muted-foreground bg-background px-1.5 py-0.5">
-          {article.source.name}
-        </span>
-      )}
-    </div>
-  );
-}
+/* La foto, o nada.
 
+   Un medio puede no traer foto —los feeds de WordPress casi nunca la traen— y
+   las fotos de terceros fallan por motivos que este sitio no controla. La nota
+   se pinta entonces sin ella: titular, entradilla y firma, que es como un
+   diario compone una nota breve. No lleva relleno.
+
+   Antes había una trama de líneas diagonales imitando el gris de imprenta.
+   Ocupaba el sitio de una foto sin serlo, y en una página que ya se ordena con
+   reglas y columnas, esa mancha competía con el material de verdad. */
 function Cover({
   article,
   className,
   eager,
-  label = true,
 }: {
   article: Article;
   className: string;
@@ -77,10 +64,11 @@ function Cover({
 }) {
   const [failed, setFailed] = useState(false);
 
+  if (!article.image_url || failed) return null;
+
   return (
     <div className={`overflow-hidden ${className}`}>
-      {article.image_url && !failed ? (
-        <img
+      <img
           src={article.image_url}
           alt=""
           loading={eager ? 'eager' : 'lazy'}
@@ -95,10 +83,7 @@ function Cover({
              valor arbitrario, Tailwind v4 define la variable pero no llega a
              emitir la propiedad `filter`, y el efecto no se aplica. */
           className="h-full w-full object-cover [filter:grayscale(0.8)_contrast(1.06)] group-hover:[filter:none] transition-[filter] duration-500"
-        />
-      ) : (
-        <Fallback article={article} label={label} />
-      )}
+      />
     </div>
   );
 }

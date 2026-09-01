@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useFeatured } from '../../hooks/useNews';
+import { splitByImage, takeBriefs } from '../../lib/articles';
 import { ArticleCard } from '../news/ArticleCard';
 import { CardSkeleton, EmptyState, ErrorState } from '../news/States';
 
@@ -8,6 +9,12 @@ import { CardSkeleton, EmptyState, ErrorState } from '../news/States';
    La nota principal ocupa las dos de la izquierda y la tercera es la columna
    de breves, separada por una línea vertical — la retícula clásica de una
    primera plana. Debajo, una banda de cuatro notas separadas por filetes.
+
+   El reparto lo decide la foto. La plana y la banda son bloques ilustrados:
+   una nota sin imagen puesta ahí deja un hueco donde las de al lado tienen
+   material. Las que no traen foto bajan a la columna de breves, que es
+   exactamente para lo que existe desde que hay periódicos: el titular corto
+   sin fotografía. Dentro de cada bloque sigue mandando la fecha.
 
    No hay `Reveal` en esta sección a propósito. En la web hermana las tarjetas
    entran con desenfoque al hacer scroll; aquí la portada tiene que estar
@@ -21,18 +28,19 @@ export function FrontPageSection() {
   const { data, loading, error, reload } = useFeatured(12);
 
   const pool = data?.results ?? [];
+  const { withImage, withoutImage } = splitByImage(pool);
 
-  /* La principal ocupa media plana, así que se prefiere una que traiga foto:
-     sin ella el bloque queda como un titular suelto en mitad de la página. */
-  const leadIndex = Math.max(0, pool.findIndex((article) => article.image_url));
-  const lead = pool[leadIndex];
-  const rest = pool.filter((_, i) => i !== leadIndex);
+  /* La principal y la banda de cuatro salen de las ilustradas, en el orden en
+     que llegaron: lo más reciente primero. */
+  const lead = withImage[0];
+  const rest = withImage.slice(1, 5);
 
-  const used = new Set([lead?.slug, ...rest.slice(0, 4).map((a) => a.slug)].filter(Boolean));
-  const briefs = pool.filter((a) => !used.has(a.slug)).slice(0, 6);
+  /* Y los breves, de las que no traen foto. Si esa corrida trajo pocas, se
+     completa con las ilustradas que no cupieron arriba. */
+  const briefs = takeBriefs(withoutImage, withImage.slice(5), 6);
 
   return (
-    <section id="portada" className="px-4 md:px-8 lg:px-12 py-8 scroll-mt-14">
+    <section id="portada" className="px-4 md:px-8 lg:px-12 py-8">
       <div className="max-w-[1200px] mx-auto">
         {error && <ErrorState message={error} onRetry={reload} />}
 
@@ -81,7 +89,7 @@ export function FrontPageSection() {
               <>
                 <div className="rule-double my-8" aria-hidden="true" />
                 <div className="col-rules grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-0">
-                  {rest.slice(0, 4).map((article) => (
+                  {rest.map((article) => (
                     <div key={article.slug} className="md:px-5 first:md:pl-0 last:md:pr-0">
                       <ArticleCard article={article} />
                     </div>

@@ -206,12 +206,6 @@ export function ArticlePage() {
                 {/* La salida al medio original. Es el elemento principal de la
                     página: aquí no hay más texto que leer. */}
                 <SourceCredit article={article} variant="block" className="mb-6" />
-
-                <p className="text-xs text-muted-foreground leading-relaxed m-0 max-w-[70ch]">
-                  El Guayasense es un agregador: reproduce el titular y un extracto breve
-                  con fines informativos y enlaza al artículo completo. Los derechos sobre el
-                  texto y las imágenes pertenecen a {article.source.name}.
-                </p>
               </article>
             )}
           </div>
