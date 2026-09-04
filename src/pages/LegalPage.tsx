@@ -4,7 +4,13 @@ import { Footer } from '../components/Footer';
 import { usePageSeo } from '../hooks/usePageSeo';
 
 /* Marco compartido por las dos páginas legales: mismo ritmo tipográfico, un
-   solo sitio donde tocarlo. */
+   solo sitio donde tocarlo.
+
+   Se compone como el resto del diario: los apartados no van numerados ni
+   separados por aire, sino por la raya fina que separa dos notas de una misma
+   columna, y cada titular lleva su filete rojo debajo. Un documento legal
+   impreso se lee así —seguido y ordenado por reglas—, no como una lista de
+   cláusulas de una aplicación. */
 
 type Section = { title: string; body: ReactNode };
 
@@ -48,10 +54,10 @@ export function LegalPage({
             </p>
           </header>
 
-          <div className="flex flex-col gap-10">
-            {sections.map((section) => (
-              <section key={section.title}>
-                <h2 className="font-display font-bold text-xl md:text-2xl text-foreground tracking-tight m-0 mb-3">
+          <div className="flex flex-col">
+            {sections.map((section, i) => (
+              <section key={section.title} className={i > 0 ? 'rule-thin pt-8 mt-8' : ''}>
+                <h2 className="rule-kicker font-display font-bold text-xl md:text-2xl text-foreground m-0 mb-4">
                   {section.title}
                 </h2>
                 <div className="text-base text-muted-foreground leading-relaxed flex flex-col gap-3">

@@ -14,23 +14,23 @@ import { environment } from '../environments/environment';
 const RULES = [
   {
     title: 'Titular y entradilla, nada más',
-    body: 'Guardamos el titular, un extracto de unas pocas líneas y la imagen de portada que el propio medio publica en su feed. Nunca el cuerpo del artículo.',
+    body: 'De cada nota se toma el titular, una entradilla de pocas líneas y la fotografía que el propio medio pone en su feed. El cuerpo del artículo no se toca nunca.',
   },
   {
     title: 'El crédito y la salida al medio',
-    body: 'Cada nota lleva el nombre del medio y un enlace directo a su página. El lector que quiere leer completo termina en el sitio del medio, que es donde debe estar.',
+    body: 'Cada pieza va firmada con el nombre del medio y con la salida a su página. Quien quiere leerla entera termina en la web de quien la escribió, que es donde debe terminar.',
   },
   {
     title: 'Sindicación antes que lectura de HTML',
-    body: 'Preferimos el RSS que cada medio publica para ser sindicado. Solo leemos HTML cuando no hay feed, y siempre respetando lo que diga su robots.txt.',
+    body: 'Se lee el feed que cada medio publica precisamente para ser sindicado. El HTML solo se mira cuando no hay feed, y siempre dentro de lo que permita su robots.txt.',
   },
   {
     title: 'Ritmo de lectura y firma del robot',
-    body: 'Espaciamos las peticiones y respetamos el Crawl-delay que declare cada sitio. Nos identificamos con un User-Agent propio y un contacto, nunca disfrazados de navegador.',
+    body: 'Las peticiones van espaciadas y se acata el Crawl-delay que declare cada sitio. El robot se presenta con nombre propio y un correo de contacto; nunca disfrazado de navegador.',
   },
   {
     title: 'Salir es inmediato',
-    body: 'Si un medio pide no aparecer, lo retiramos el mismo día y sin condiciones. También ajustamos la frecuencia si el ritmo actual le resulta alto.',
+    body: 'Si un medio pide no salir en esta edición, se retira el mismo día y sin condiciones. Y si el ritmo de lectura le parece alto, se baja: lo fija él, no este diario.',
   },
 ];
 

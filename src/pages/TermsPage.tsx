@@ -2,118 +2,128 @@ import { Link } from 'react-router-dom';
 import { LegalPage } from './LegalPage';
 import { environment } from '../environments/environment';
 
-const UPDATED = '29 de agosto de 2026';
+const UPDATED = '4 de septiembre de 2026';
+
+/* Las condiciones de uso, en el registro del diario: usted, «edición»,
+   «material», «componer». Empiezan por lo que de verdad importa —el material
+   no es de esta casa— y no por la definición del servicio, que es como lo
+   ordenaría un contrato y no un periódico.
+
+   Deliberadamente distintas, en orden y en redacción, a las de la web
+   hermana. */
 
 export function TermsPage() {
   return (
     <LegalPage
-      eyebrow="Legal"
+      eyebrow="Documentos de la casa"
       title="Condiciones de uso"
       updated={UPDATED}
       path="/terminos"
       seoTitle="Condiciones de uso — El Guayasense"
-      seoDescription="Condiciones de uso de El Guayasense, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios."
-      intro="Al usar El Guayasense aceptas estas condiciones. La más importante cabe en una línea: el contenido no es nuestro, y por eso siempre te llevamos a quien lo escribió."
+      seoDescription="Condiciones de uso de El Guayasense y cómo se trata en esta edición el material de los medios de la ciudad."
+      intro="Quien abre esta edición acepta lo que sigue. Todo cabe en una línea: el material no es de esta casa, y por eso cada nota lleva el nombre de quien la escribió y la salida a su página."
       sections={[
         {
-          title: '1. Qué es este sitio',
-          body: (
-            <p className="m-0">
-              El Guayasense es un agregador. Reunimos titulares y extractos breves
-              publicados por medios de comunicación, indicamos siempre el medio de origen y
-              enlazamos a su artículo completo. No somos un medio de comunicación ni
-              elaboramos contenido periodístico.
-            </p>
-          ),
-        },
-        {
-          title: '2. Contenido de terceros y derechos de autor',
+          title: 'El material no es de este diario',
           body: (
             <>
               <p className="m-0">
-                Los titulares, extractos e imágenes que aparecen aquí pertenecen a los medios
-                que los publicaron. Se muestran con fines informativos y de referencia, en
-                extensión limitada y con atribución visible, para que el lector decida si
-                quiere leer el artículo completo en la fuente.
+                Los titulares, las entradillas y las fotografías que se componen en estas
+                planas pertenecen a los medios que los publicaron. Aparecen aquí con fines
+                informativos y de referencia, en extensión corta y con el crédito siempre a la
+                vista, para que usted decida si quiere leer la nota completa en su fuente.
               </p>
               <p className="m-0">
-                No reproducimos el cuerpo de los artículos, no eliminamos las firmas de autor
-                y no presentamos contenido ajeno como propio.
+                Nunca se reproduce el cuerpo de un artículo, nunca se borra la firma de su
+                autor y nunca se presenta material ajeno como propio. El Guayasense reúne y
+                acredita; no redacta.
               </p>
             </>
           ),
         },
         {
-          title: '3. Cómo obtenemos el contenido',
+          title: 'Cómo se compone la edición',
           body: (
             <p className="m-0">
-              Leemos principalmente los feeds RSS que cada medio publica para ser sindicado.
-              Respetamos el <code>robots.txt</code> de cada sitio, espaciamos las peticiones,
-              acatamos el <code>Crawl-delay</code> que declaren y nos identificamos con un
-              User-Agent propio. Las reglas completas están en{' '}
+              Se leen, sobre todo, los feeds que cada medio publica precisamente para ser
+              sindicado. Se respeta el <code>robots.txt</code> de cada sitio, se espacian las
+              peticiones, se acata el <code>Crawl-delay</code> que declaren y el robot se
+              identifica con nombre y correo de contacto, nunca disfrazado de navegador. Las
+              reglas completas están en{' '}
               <Link to="/medios" className="text-accent no-underline hover:underline">
-                Medios
+                la redacción de esta edición
               </Link>
               .
             </p>
           ),
         },
         {
-          title: '4. Retiro de contenido',
+          title: 'Retirada del material, el mismo día',
           body: (
             <p className="m-0">
-              Cualquier medio puede pedir que dejemos de mostrar su contenido y lo retiramos
-              el mismo día, sin condiciones ni contrapartidas. Basta con escribir a{' '}
+              Cualquier medio puede pedir que su material deje de aparecer, y se retira el
+              mismo día, sin condiciones y sin pedir nada a cambio. Basta con escribir a{' '}
               <a href={`mailto:${environment.contactEmail}`} className="text-accent no-underline hover:underline">
                 {environment.contactEmail}
               </a>{' '}
-              desde un correo del medio.
+              desde una dirección del propio medio. No hace falta invocar ninguna ley ni
+              justificar el motivo.
             </p>
           ),
         },
         {
-          title: '5. Exactitud de la información',
+          title: 'La responsabilidad editorial es de cada medio',
           body: (
             <p className="m-0">
-              No verificamos ni editamos las notas que agregamos: la responsabilidad
-              editorial es de cada medio. Un titular puede cambiar o corregirse en la fuente
-              después de que lo tomamos. Ante cualquier duda, la versión válida es la del
-              artículo original.
+              Aquí no se verifica ni se corrige lo que publican los medios: la responsabilidad
+              sobre cada nota es de quien la firma. Un titular puede corregirse en la fuente
+              después de que esta edición lo recogió. Ante cualquier duda, la versión válida es
+              la del artículo original, no la de esta plana.
             </p>
           ),
         },
         {
-          title: '6. Uso del sitio',
+          title: 'Qué puede hacer usted con esta edición',
           body: (
             <p className="m-0">
-              El acceso es libre y gratuito. No está permitido usar medios automatizados para
-              extraer masivamente el contenido de este sitio ni replicarlo en otro servicio;
-              precisamente porque el contenido no es nuestro, no podemos autorizar su
-              redistribución.
+              Leerla y compartirla: el acceso es libre y gratuito, y cada nota se puede enlazar
+              sin pedir permiso. Lo que no se puede es extraer el contenido de forma masiva con
+              medios automatizados ni replicarlo en otro servicio. La razón es la de siempre:
+              como el material no es de esta casa, esta casa no puede autorizar que se
+              redistribuya.
             </p>
           ),
         },
         {
-          title: '7. Disponibilidad y cambios',
+          title: 'Los espacios publicitarios',
           body: (
             <p className="m-0">
-              El sitio se ofrece tal cual, sin garantía de disponibilidad continua. Podemos
-              modificar estos términos; los cambios se reflejarán en la fecha del encabezado.
-              Consulta también la{' '}
-              <Link to="/privacidad" className="text-accent no-underline hover:underline">
-                política de privacidad
-              </Link>
-              .
+              Los avisos que aparecen en estas planas van siempre rotulados como tales y nunca
+              se componen con la tipografía ni el formato de una nota. Contratar un espacio no
+              da derecho a decidir qué se publica ni en qué orden: la edición se compone antes
+              de que entre el aviso.
             </p>
           ),
         },
         {
-          title: '8. Ley aplicable',
+          title: 'Disponibilidad, cambios y ley aplicable',
           body: (
-            <p className="m-0">
-              Estos términos se rigen por la legislación de la República del Ecuador. Cualquier
-              controversia se someterá a los jueces competentes de la ciudad de Guayaquil.
-            </p>
+            <>
+              <p className="m-0">
+                La edición se ofrece tal cual, sin garantía de estar disponible sin
+                interrupción. Estas condiciones pueden cambiar; la fecha del encabezado dice
+                cuándo se compuso la versión que está leyendo. Léalas junto al{' '}
+                <Link to="/privacidad" className="text-accent no-underline hover:underline">
+                  aviso de privacidad
+                </Link>
+                .
+              </p>
+              <p className="m-0">
+                Todo lo anterior se rige por la legislación de la República del Ecuador, y
+                cualquier controversia se someterá a los jueces competentes de la ciudad de
+                Guayaquil.
+              </p>
+            </>
           ),
         },
       ]}

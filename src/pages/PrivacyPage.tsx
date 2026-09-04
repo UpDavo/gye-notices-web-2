@@ -2,111 +2,127 @@ import { Link } from 'react-router-dom';
 import { LegalPage } from './LegalPage';
 import { environment } from '../environments/environment';
 
-const UPDATED = '29 de agosto de 2026';
+const UPDATED = '4 de septiembre de 2026';
+
+/* El aviso de privacidad, compuesto como lo escribiría un diario y no como lo
+   escribiría una aplicación: se trata al lector de usted, se empieza por la
+   conclusión —aquí no se sabe quién es— y quién responde por la edición se
+   deja para el final, que es donde va el colofón de un impreso.
+
+   El orden y el tratamiento son deliberadamente distintos a los de la web
+   hermana. Son dos diarios, no dos temas del mismo sitio, y dos diarios no
+   publican el mismo aviso legal palabra por palabra. */
 
 export function PrivacyPage() {
   return (
     <LegalPage
-      eyebrow="Legal"
+      eyebrow="Documentos de la casa"
       title="Aviso de privacidad"
       updated={UPDATED}
       path="/privacidad"
       seoTitle="Aviso de privacidad — El Guayasense"
-      seoDescription="Qué datos recoge El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador."
-      intro="El Guayasense no pide registro ni recoge datos personales para funcionar. Esta página explica lo poco que sí se guarda y por qué."
+      seoDescription="Qué datos guarda El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador."
+      intro="Este diario no pide registro, no abre cuentas y no recoge datos que permitan identificar a quien lo lee. Lo que sigue explica lo poco que sí queda guardado, dónde queda y por cuánto tiempo."
       sections={[
         {
-          title: '1. Quiénes somos',
+          title: 'Lo corto: aquí no se sabe quién es usted',
+          body: (
+            <>
+              <p className="m-0">
+                <strong className="text-foreground">No se recoge ningún dato que le identifique.</strong>{' '}
+                No hay cuentas, ni suscripción, ni formularios. Nunca se le pide su nombre, su
+                correo ni su teléfono para leer la edición.
+              </p>
+              <p className="m-0">
+                No hay perfiles de lectura, ni etiquetas de seguimiento, ni herramientas de
+                publicidad conductual. Los espacios que se venden en estas planas se contratan
+                por su posición —el faldón de portada, la columna de una nota—, no por lo que
+                haya leído usted antes.
+              </p>
+            </>
+          ),
+        },
+        {
+          title: 'Lo que se guarda en su navegador',
+          body: (
+            <>
+              <p className="m-0">
+                Dos valores, y ninguno sale de su equipo:{' '}
+                <code>elguayasense-theme</code>, que recuerda si prefiere la edición diurna o
+                la nocturna, y <code>cookie_consent</code>, que recuerda que ya vio el aviso y
+                evita repetírselo en cada visita.
+              </p>
+              <p className="m-0">
+                Van en <code>localStorage</code>, no en cookies de seguimiento. Puede borrarlos
+                cuando quiera desde la configuración de su navegador: la edición se sigue
+                leyendo igual, solo que volverá a abrirse en diurna.
+              </p>
+            </>
+          ),
+        },
+        {
+          title: 'Lo que queda en el servidor',
           body: (
             <p className="m-0">
-              El Guayasense es un agregador de noticias de la ciudad. Reunimos titulares
-              y extractos publicados por medios de comunicación y enlazamos a sus artículos
-              originales. No producimos contenido periodístico propio.
+              Como en cualquier sitio, el servidor anota las peticiones que recibe —dirección
+              IP, fecha, página pedida y navegador— por seguridad y para detectar averías. Esos
+              registros se conservan un tiempo limitado, no se cruzan con ninguna otra
+              información y no se ceden a terceros.
             </p>
           ),
         },
         {
-          title: '2. Qué datos recogemos',
+          title: 'Las fotos y los enlaces son de cada medio',
           body: (
             <>
               <p className="m-0">
-                <strong className="text-foreground">Ninguno que le identifique.</strong> No hay
-                cuentas, ni formularios de registro, ni newsletter. No pedimos tu nombre, tu
-                correo ni tu teléfono para leer el sitio.
+                Las fotografías de las notas se sirven desde los servidores del medio que las
+                publicó. Al pintarse en la plana, su navegador habla directamente con ellos, y
+                cada uno aplica sus propias reglas.
               </p>
               <p className="m-0">
-                Lo único que se guarda vive en tu propio navegador y nunca sale de él: la
-                preferencia de modo claro u oscuro y el estado del aviso de cookies.
+                Y cuando usted sigue el enlace a la nota original sale de este diario: a partir
+                de ahí manda la política del medio al que llegó, no esta.
               </p>
             </>
           ),
         },
         {
-          title: '3. Cookies y almacenamiento local',
-          body: (
-            <>
-              <p className="m-0">
-                Usamos <code>localStorage</code>, no cookies de seguimiento. Se guardan dos
-                valores: <code>elguayasense-theme</code> (claro u oscuro) y <code>cookie_consent</code>{' '}
-                (si ya viste el aviso).
-              </p>
-              <p className="m-0">
-                Puedes borrarlos en cualquier momento desde la configuración de tu navegador.
-                El sitio seguirá funcionando igual.
-              </p>
-            </>
-          ),
-        },
-        {
-          title: '4. Registros del servidor',
+          title: 'Sus derechos, y por qué aquí casi no hacen falta',
           body: (
             <p className="m-0">
-              Como cualquier sitio web, nuestro servidor registra las peticiones que recibe
-              (dirección IP, fecha, página solicitada, navegador) por seguridad y para
-              detectar fallos. Estos registros se conservan un tiempo limitado y no se cruzan
-              con ninguna otra información ni se ceden a terceros.
-            </p>
-          ),
-        },
-        {
-          title: '5. Contenido y enlaces de terceros',
-          body: (
-            <>
-              <p className="m-0">
-                Las imágenes de las notas se cargan desde los servidores de cada medio. Al
-                mostrarse, tu navegador se comunica directamente con ellos, que pueden aplicar
-                sus propias políticas.
-              </p>
-              <p className="m-0">
-                Al seguir un enlace a un artículo original sales de este sitio y pasas a
-                regirte por la política de privacidad de ese medio.
-              </p>
-            </>
-          ),
-        },
-        {
-          title: '6. Tus derechos',
-          body: (
-            <p className="m-0">
-              La Ley Orgánica de Protección de Datos Personales del Ecuador te da derecho de
-              acceso, rectificación, eliminación y oposición sobre tus datos personales. Como
-              no tratamos datos que te identifiquen, en la práctica no hay nada que rectificar
-              ni eliminar. Aun así, si tienes una consulta escríbenos a{' '}
+              La Ley Orgánica de Protección de Datos Personales del Ecuador le reconoce los
+              derechos de acceso, rectificación, eliminación y oposición sobre sus datos
+              personales. Como en esta edición no se tratan datos que le identifiquen, en la
+              práctica no hay nada que rectificar ni que eliminar. Si aun así tiene una
+              consulta, escriba a{' '}
               <a href={`mailto:${environment.contactEmail}`} className="text-accent no-underline hover:underline">
                 {environment.contactEmail}
               </a>
-              .
+              {' '}y se le contesta.
             </p>
           ),
         },
         {
-          title: '7. Cambios',
+          title: 'Quién responde por esta edición',
           body: (
             <p className="m-0">
-              Si esta política cambia, actualizaremos la fecha del encabezado. Los cambios
-              relevantes se anunciarán en la portada. Consulta también los{' '}
+              El Guayasense reúne titulares y entradillas publicados por los medios de
+              Guayaquil, los acredita y devuelve al lector a la nota original. No produce
+              material periodístico propio. La responsabilidad sobre cada texto es del medio
+              que lo firma; la responsabilidad sobre esta plana y sobre este aviso es de quien
+              edita el sitio.
+            </p>
+          ),
+        },
+        {
+          title: 'Si este aviso cambia',
+          body: (
+            <p className="m-0">
+              La fecha del encabezado dice cuándo se compuso esta versión. Si cambia algo de
+              fondo, se anuncia en portada. Junto a este documento conviene leer las{' '}
               <Link to="/terminos" className="text-accent no-underline hover:underline">
-                términos y condiciones
+                condiciones de uso
               </Link>
               .
             </p>
