@@ -39,17 +39,30 @@ export type MedidaModulo = {
   medida: string;
   /* Y la medida real del archivo que hay que entregar. */
   archivo: string;
-  /* Proporción del hueco. Se aplica al aviso y al recuadro vacío por igual:
-     así el hueco mide lo mismo contratado que libre. */
+  /* Proporción del hueco. El aviso contratado la respeta siempre; el recuadro
+     de espacio libre la usa como MÍNIMO y crece si su texto no cabe. Recortar
+     el texto para conservar la medida exacta era el peor de los dos males: el
+     hueco medía bien y no se leía. */
   proporcion: string;
+  /* Altura mínima del recuadro libre. NO se usa la proporción: un
+     `aspect-ratio` fija la altura y recorta el texto que no quepa, y un
+     titular cortado es peor que un recuadro un poco más alto de la cuenta. */
+  minimoLibre: string;
+  /* Cómo se compone el recuadro libre. Un módulo ancho y bajo —el faldón, el
+     clasificado— no admite cuatro líneas apiladas: ahí el texto va a la
+     izquierda y el botón a la derecha. */
+  disposicion: 'apilado' | 'fila';
+  /* El clasificado es el módulo más pequeño de la edición: una línea y su
+     medida, nada más. */
+  compacto?: boolean;
 };
 
 export const MODULOS: Record<Modulo, MedidaModulo> = {
-  faldon:      { nombre: 'Faldón',        medida: '8 col × 5 cm',  archivo: '1200 × 250 px', proporcion: 'aspect-[5/2] sm:aspect-[4/1] md:aspect-[1200/250]' },
-  robapaginas: { nombre: 'Robapáginas',   medida: '3 col × 12 cm', archivo: '600 × 500 px',  proporcion: 'aspect-[3/2] md:aspect-[600/500]' },
-  modulo:      { nombre: 'Módulo',        medida: '2 col × 8 cm',  archivo: '400 × 330 px',  proporcion: 'aspect-[400/330]' },
-  columna:     { nombre: 'Columna',       medida: '1 col × 20 cm', archivo: '300 × 600 px',  proporcion: 'aspect-[3/2] md:aspect-[300/600]' },
-  clasificado: { nombre: 'Clasificado',   medida: '2 col × 3 cm',  archivo: '400 × 120 px',  proporcion: 'aspect-[400/120]' },
+  faldon:      { nombre: 'Faldón',      medida: '8 col × 5 cm',  archivo: '1200 × 250 px', proporcion: 'aspect-[5/2] sm:aspect-[4/1] md:aspect-[1200/250]', minimoLibre: 'min-h-[8rem] md:min-h-[10rem]',  disposicion: 'fila' },
+  robapaginas: { nombre: 'Robapáginas', medida: '3 col × 12 cm', archivo: '600 × 500 px',  proporcion: 'aspect-[3/2] md:aspect-[600/500]',                  minimoLibre: 'min-h-[16rem] md:min-h-[20rem]', disposicion: 'apilado' },
+  modulo:      { nombre: 'Módulo',      medida: '2 col × 8 cm',  archivo: '400 × 330 px',  proporcion: 'aspect-[400/330]',                                  minimoLibre: 'min-h-[14rem]',                  disposicion: 'apilado' },
+  columna:     { nombre: 'Columna',     medida: '1 col × 20 cm', archivo: '300 × 600 px',  proporcion: 'aspect-[3/2] md:aspect-[300/600]',                  minimoLibre: 'min-h-[16rem] md:min-h-[30rem]', disposicion: 'apilado' },
+  clasificado: { nombre: 'Clasificado', medida: '2 col × 3 cm',  archivo: '400 × 120 px',  proporcion: 'aspect-[400/120]',                                  minimoLibre: 'min-h-[6.5rem]',                 disposicion: 'fila', compacto: true },
 };
 
 export type DefinicionEspacio = {

@@ -64,6 +64,8 @@ export function Aviso({ espacio, className = '' }: Props) {
   const modulo = MODULOS[definicion.modulo];
   const contratado = avisoDe(espacio);
   const aviso = contratado && !fallo ? contratado : null;
+  const fila = modulo.disposicion === 'fila';
+  const compacto = Boolean(modulo.compacto);
 
   return (
     <figure className={`m-0 ${className}`}>
@@ -97,24 +99,42 @@ export function Aviso({ espacio, className = '' }: Props) {
           </picture>
         </EnlaceAviso>
       ) : (
+        /* El recuadro libre va con `min-h` y NO con la proporción del módulo:
+           un `aspect-ratio` fija la altura y recorta el titular que no quepa.
+           El aviso contratado sí conserva la medida exacta. */
         <a
           href={correoContratacion(definicion, modulo)}
-          className={`group flex flex-col items-center justify-center text-center gap-2 border border-[hsl(var(--rule))] bg-muted/40 px-5 py-6 no-underline text-foreground ${modulo.proporcion}`}
+          className={`group flex border border-[hsl(var(--rule))] bg-muted/40 no-underline text-foreground ${modulo.minimoLibre} ${
+            fila
+              ? 'flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-4 py-4 sm:px-6'
+              : 'flex-col items-center justify-center text-center gap-2 px-5 py-6'
+          }`}
           style={TRAMA}
         >
-          <span className="font-display font-bold text-lg md:text-2xl leading-[1.15] text-foreground">
-            {definicion.libre.titular}
+          <span className={fila ? 'min-w-0' : 'contents'}>
+            <span
+              className={`block font-display font-bold leading-[1.15] text-foreground ${
+                compacto ? 'text-[15px]' : fila ? 'text-lg md:text-xl' : 'text-lg md:text-2xl'
+              }`}
+            >
+              {definicion.libre.titular}
+            </span>
+            {!compacto && (
+              <span className="block text-[12px] md:text-[13px] text-muted-foreground max-w-sm leading-snug mt-1.5">
+                {definicion.libre.texto}
+              </span>
+            )}
           </span>
-          <span className="text-[12px] md:text-[13px] text-muted-foreground max-w-sm leading-snug">
-            {definicion.libre.texto}
-          </span>
-          <span className="mt-2 border border-[hsl(var(--rule))] bg-background px-5 py-2 text-[11px] uppercase tracking-[0.16em] group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-colors">
-            Contrate este espacio
-          </span>
-          {/* La medida de imprenta y el archivo que hay que entregar: es lo
-              primero que pregunta quien va a pautar. */}
-          <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80">
-            {modulo.nombre} · {modulo.medida} · {modulo.archivo}
+
+          <span className={`flex flex-col gap-1.5 shrink-0 ${fila ? 'items-start sm:items-end' : 'items-center mt-2'}`}>
+            <span className="border border-[hsl(var(--rule))] bg-background px-4 py-1.5 text-[10px] uppercase tracking-[0.16em] group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-colors">
+              {compacto ? 'Contrátelo' : 'Contrate este espacio'}
+            </span>
+            {/* La medida de imprenta y el archivo que hay que entregar: es lo
+                primero que pregunta quien va a pautar. */}
+            <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80">
+              {modulo.nombre} · {modulo.medida}{compacto ? '' : ` · ${modulo.archivo}`}
+            </span>
           </span>
         </a>
       )}
