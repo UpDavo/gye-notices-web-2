@@ -34,25 +34,25 @@ const PAGES = [
   },
   {
     outPath: 'medios/index.html',
-    title: 'Medios y cómo trabajamos — El Guayasense',
+    title: 'La redacción de esta edición — El Guayasense',
     description:
-      'De qué medios sale el contenido de El Guayasense y con qué reglas se agrega: solo titular y extracto, enlace al original y salida inmediata a petición.',
+      'De qué medios sale el material de El Guayasense y con qué reglas se compone: titular y entradilla, crédito y salida al original, y retirada inmediata a petición.',
     canonical: `${SITE_URL}/medios`,
     ogType: 'website',
   },
   {
     outPath: 'privacidad/index.html',
-    title: 'Política de privacidad — El Guayasense',
+    title: 'Aviso de privacidad — El Guayasense',
     description:
-      'Qué datos recoge El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.',
+      'Qué datos guarda El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador.',
     canonical: `${SITE_URL}/privacidad`,
     ogType: 'article',
   },
   {
     outPath: 'terminos/index.html',
-    title: 'Términos y condiciones — El Guayasense',
+    title: 'Condiciones de uso — El Guayasense',
     description:
-      'Condiciones de uso de El Guayasense, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios.',
+      'Condiciones de uso de El Guayasense y cómo se trata en esta edición el material de los medios de la ciudad.',
     canonical: `${SITE_URL}/terminos`,
     ogType: 'article',
   },
