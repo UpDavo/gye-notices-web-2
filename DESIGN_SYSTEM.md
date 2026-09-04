@@ -286,3 +286,35 @@ marca sigue siendo `[0.21, 0.65, 0.36, 1]`. Pero aquí **casi nada se mueve**:
 | Sombras para separar | Reglas para separar |
 | `Reveal` en la portada | Portada quieta |
 | Celeste, morado o verde | Solo tinta, papel y rojo |
+
+---
+
+## 11. Avisos
+
+Un diario no vende «banners»: vende **módulos** de una plana y los mide en
+columnas y centímetros. Ese es el vocabulario de `src/data/avisos.ts`, y no es
+coquetería —es lo que hace que el hueco libre se lea como el recuadro de
+«CONTRATE ESTE ESPACIO» de un impreso y no como un hueco de red publicitaria.
+Lo pinta `Aviso` / `BandaAviso` / `Clasificados`
+(`src/components/avisos/Aviso.tsx`).
+
+`ESPACIOS` son los huecos —existen siempre, contratados o no, con la misma
+medida— y `AVISOS` las piezas contratadas.
+
+| Hueco | Módulo | Medida | Dónde |
+|---|---|---|---|
+| `portada-faldon` | Faldón | 8 col × 5 cm | Portada, bajo el cintillo |
+| `portada-modulo` | Módulo | 2 col × 8 cm | Al pie de la columna de breves |
+| `edicion-faldon` | Faldón | 8 col × 5 cm | `/noticias` y cada sección |
+| `nota-columna` | Columna | 1 col × 20 cm | Columna lateral de la nota |
+| `nota-faldon` | Faldón | 8 col × 5 cm | Cierre de la nota |
+| `clasificados` | Clasificado | 2 col × 3 cm | Banda de tres, al final de portada |
+
+**Forma del recuadro libre:** filete, rótulo en versalitas sobre línea, la
+trama diagonal a 45° con la que se rellena un hueco sin material, titular en
+serif, botón rectangular «Contrate este espacio» y, en pequeño, la medida de
+imprenta más el archivo que hay que entregar. Sin sombra, sin radio, sin
+entrada animada: aquí nada de eso existe.
+
+La pieza contratada **no** lleva la grisalla de las fotos de las notas: eso es
+tratamiento editorial y un aviso va como lo entregó quien lo paga.

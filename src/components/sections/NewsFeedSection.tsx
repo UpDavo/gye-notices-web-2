@@ -88,7 +88,7 @@ export function NewsFeedSection() {
         {!error && loading && <GridSkeleton count={PAGE_SIZE} />}
 
         {!error && !loading && articles.length === 0 && (
-          <EmptyState message="En cuanto los medios publiquen algo de esta sección, aparecerá aquí." />
+          <EmptyState message="Cuando los medios publiquen algo de esta sección, entrará en la edición." />
         )}
 
         {!error && !loading && articles.length > 0 && (

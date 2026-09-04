@@ -4,6 +4,7 @@ import { HeroBanners } from '../components/HeroBanners';
 import { TickerSection } from '../components/sections/TickerSection';
 import { FrontPageSection } from '../components/sections/FrontPageSection';
 import { NewsFeedSection } from '../components/sections/NewsFeedSection';
+import { BandaAviso, Clasificados } from '../components/avisos/Aviso';
 import { usePageSeo } from '../hooks/usePageSeo';
 import { SITE_URL } from '../lib/api';
 
@@ -43,8 +44,13 @@ export function HomePage() {
       <main className="flex-1">
         <HeroBanners />
         <TickerSection />
+        {/* El faldón de primera plana. Los huecos se definen en
+            `src/data/avisos.ts` y se componen contratados o libres, con la
+            misma medida, para que la plana no se recomponga al entrar uno. */}
+        <BandaAviso espacio="portada-faldon" />
         <FrontPageSection />
         <NewsFeedSection />
+        <Clasificados />
       </main>
       <Footer />
     </div>

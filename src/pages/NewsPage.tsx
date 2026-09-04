@@ -5,6 +5,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { ArticleFeed } from '../components/news/ArticleFeed';
 import { CategoryTabs } from '../components/news/CategoryTabs';
+import { Aviso } from '../components/avisos/Aviso';
 import { useArticles, useCategories } from '../hooks/useNews';
 import { usePageSeo } from '../hooks/usePageSeo';
 
@@ -51,7 +52,7 @@ export function NewsPage() {
     title,
     description: query
       ? `Resultados de "${query}" en las noticias de Guayaquil.`
-      : 'Todas las noticias de Guayaquil publicadas por los medios de la ciudad, con crédito y enlace al original.',
+      : 'El archivo completo de El Guayasense: todo lo que publicaron los medios de la ciudad, con su crédito y el enlace al original.',
     path: query ? `/noticias?q=${encodeURIComponent(query)}` : '/noticias',
     // Una página de resultados no aporta nada a un buscador y compite con las
     // notas reales por presupuesto de rastreo.
@@ -80,7 +81,7 @@ export function NewsPage() {
 
           <form onSubmit={submitSearch} role="search" className="mb-6 flex gap-3">
             <label htmlFor="page-search" className="sr-only">
-              Buscar noticias
+              Buscar en la edición
             </label>
             <div className="flex items-center gap-2 rounded-none border border-[hsl(var(--rule))] bg-surface px-4 py-2.5 flex-1 max-w-md focus-within:border-accent transition-colors">
               <Search size={16} className="text-muted-foreground shrink-0" aria-hidden="true" />
@@ -90,7 +91,7 @@ export function NewsPage() {
                 type="search"
                 defaultValue={query}
                 key={query}
-                placeholder="Buscar en las noticias"
+                placeholder="Buscar en la edición"
                 className="bg-transparent border-0 outline-none text-sm w-full text-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -112,7 +113,9 @@ export function NewsPage() {
             )}
           </form>
 
-          <CategoryTabs categories={categories ?? []} className="mb-10" />
+          <CategoryTabs categories={categories ?? []} className="mb-8" />
+
+          <Aviso espacio="edicion-faldon" className="mb-10" />
 
           <ArticleFeed
             data={data}

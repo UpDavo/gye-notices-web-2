@@ -8,10 +8,10 @@ export function PrivacyPage() {
   return (
     <LegalPage
       eyebrow="Legal"
-      title="Política de privacidad"
+      title="Aviso de privacidad"
       updated={UPDATED}
       path="/privacidad"
-      seoTitle="Política de privacidad — El Guayasense"
+      seoTitle="Aviso de privacidad — El Guayasense"
       seoDescription="Qué datos recoge El Guayasense y cómo los trata, conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador."
       intro="El Guayasense no pide registro ni recoge datos personales para funcionar. Esta página explica lo poco que sí se guarda y por qué."
       sections={[
@@ -30,7 +30,7 @@ export function PrivacyPage() {
           body: (
             <>
               <p className="m-0">
-                <strong className="text-foreground">Ninguno que te identifique.</strong> No hay
+                <strong className="text-foreground">Ninguno que le identifique.</strong> No hay
                 cuentas, ni formularios de registro, ni newsletter. No pedimos tu nombre, tu
                 correo ni tu teléfono para leer el sitio.
               </p>

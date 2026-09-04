@@ -13,19 +13,19 @@ import { environment } from '../environments/environment';
 
 const RULES = [
   {
-    title: 'Solo titular y extracto',
+    title: 'Titular y entradilla, nada más',
     body: 'Guardamos el titular, un extracto de unas pocas líneas y la imagen de portada que el propio medio publica en su feed. Nunca el cuerpo del artículo.',
   },
   {
-    title: 'El enlace al original, siempre',
+    title: 'El crédito y la salida al medio',
     body: 'Cada nota lleva el nombre del medio y un enlace directo a su página. El lector que quiere leer completo termina en el sitio del medio, que es donde debe estar.',
   },
   {
-    title: 'Feeds antes que scraping',
+    title: 'Sindicación antes que lectura de HTML',
     body: 'Preferimos el RSS que cada medio publica para ser sindicado. Solo leemos HTML cuando no hay feed, y siempre respetando lo que diga su robots.txt.',
   },
   {
-    title: 'Ritmo y presentación',
+    title: 'Ritmo de lectura y firma del robot',
     body: 'Espaciamos las peticiones y respetamos el Crawl-delay que declare cada sitio. Nos identificamos con un User-Agent propio y un contacto, nunca disfrazados de navegador.',
   },
   {
@@ -53,7 +53,7 @@ export function SourcesPage() {
           <header className="mb-14">
             <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent m-0 mb-3">Fuentes</p>
             <h1 className="font-display font-bold text-4xl md:text-5xl text-foreground leading-[1.06] m-0 mb-5 pb-4 border-b-2 border-[hsl(var(--rule))]">
-              De dónde sale todo esto.
+              Quién escribe lo que usted lee.
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed m-0">
               El Guayasense no produce noticias. Reúne lo que publican los medios de
@@ -63,7 +63,7 @@ export function SourcesPage() {
 
           <section className="mb-16">
             <h2 className="font-display font-bold text-2xl text-foreground tracking-tight m-0 mb-6">
-              Medios que agregamos
+              La redacción de esta edición
             </h2>
             <ul className="list-none m-0 p-0 flex flex-col gap-3">
               {(sources ?? []).map((source) => (
@@ -110,11 +110,11 @@ export function SourcesPage() {
               no llega a ningún sitio es peor que no tenerlo. */}
           <section className="rounded-none border border-border bg-surface p-8 md:p-10 mb-8 text-center">
             <h2 className="font-display font-bold text-2xl text-foreground tracking-tight m-0 mb-3">
-              ¿Eres de un medio?
+              ¿Escribe usted en un medio?
             </h2>
             <p className="text-muted-foreground leading-relaxed m-0 mb-6 max-w-lg mx-auto">
-              Escríbenos si quieres que dejemos de mostrar tu contenido, si prefieres otra
-              frecuencia, o si quieres que tu medio aparezca aquí.
+              Escríbanos si prefiere que su material deje de aparecer en esta edición, si
+              quiere otra frecuencia de lectura, o si su medio debería estar en esta lista.
             </p>
             <a
               href={`mailto:${environment.contactEmail}`}

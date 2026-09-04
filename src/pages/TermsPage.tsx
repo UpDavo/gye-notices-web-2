@@ -8,10 +8,10 @@ export function TermsPage() {
   return (
     <LegalPage
       eyebrow="Legal"
-      title="Términos y condiciones"
+      title="Condiciones de uso"
       updated={UPDATED}
       path="/terminos"
-      seoTitle="Términos y condiciones — El Guayasense"
+      seoTitle="Condiciones de uso — El Guayasense"
       seoDescription="Condiciones de uso de El Guayasense, agregador de noticias de la ciudad, y cómo se trata el contenido de los medios."
       intro="Al usar El Guayasense aceptas estas condiciones. La más importante cabe en una línea: el contenido no es nuestro, y por eso siempre te llevamos a quien lo escribió."
       sections={[

@@ -3,6 +3,7 @@ import { useFeatured } from '../../hooks/useNews';
 import { splitByImage, takeBriefs } from '../../lib/articles';
 import { ArticleCard } from '../news/ArticleCard';
 import { CardSkeleton, EmptyState, ErrorState } from '../news/States';
+import { Aviso } from '../avisos/Aviso';
 
 /* La portada, compuesta a tres columnas.
 
@@ -82,6 +83,10 @@ export function FrontPageSection() {
                     </div>
                   ))}
                 </div>
+
+                {/* Al pie de la columna de breves, como el módulo que cierra
+                    una columna en un impreso. */}
+                <Aviso espacio="portada-modulo" className="mt-8" />
               </aside>
             </div>
 

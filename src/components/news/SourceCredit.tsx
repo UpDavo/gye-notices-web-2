@@ -43,7 +43,7 @@ export function SourceCredit({ article, variant = 'inline', className = '' }: Pr
   return (
     <div className={`border-t-[3px] border-b border-[hsl(var(--rule))] bg-surface p-6 ${className}`}>
       <p className="text-[11px] uppercase tracking-widest text-muted-foreground m-0 mb-2">
-        Publicado originalmente por
+        Esta nota es de
       </p>
       <p className="font-display font-bold text-lg text-foreground m-0 mb-1">{source.name}</p>
       <p className="text-sm text-muted-foreground m-0 mb-4">
@@ -57,7 +57,7 @@ export function SourceCredit({ article, variant = 'inline', className = '' }: Pr
           rel="noopener noreferrer nofollow"
           className="inline-flex items-center gap-2 px-6 py-2.5 text-[13px] uppercase tracking-[0.14em] bg-accent text-white no-underline hover:opacity-90 transition-opacity"
         >
-          Leer la nota completa
+          Leer en el medio original
           <ExternalLink size={14} aria-hidden="true" />
         </a>
         <a

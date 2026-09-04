@@ -25,9 +25,9 @@ export function CookieBanner() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface border-t border-border text-foreground px-6 md:px-12 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_-8px_32px_-12px_rgba(15,23,42,0.25)]">
       <p className="text-sm text-foreground/80 max-w-xl m-0">
-        Usamos cookies para recordar tus preferencias, como el modo oscuro.{' '}
+        Este diario guarda sus preferencias de lectura, como la edición nocturna.{' '}
         <Link to="/privacidad" className="underline hover:text-foreground transition-colors">
-          Más información
+          Leer la política
         </Link>
       </p>
       <div className="flex items-center gap-3 shrink-0">

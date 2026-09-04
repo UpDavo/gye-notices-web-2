@@ -54,7 +54,7 @@ export function SoonPage({ onUnlock }: { onUnlock: () => void }) {
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center px-6 py-16">
       <h1 className="font-display font-bold text-4xl md:text-6xl tracking-tight leading-[1.05] text-center max-w-3xl m-0">
-        Estamos armando la portada
+        La edición se está componiendo
       </h1>
 
       {/* Acceso anticipado. Discreto a propósito: no invita a probar suerte. */}
@@ -65,7 +65,7 @@ export function SoonPage({ onUnlock }: { onUnlock: () => void }) {
             className="flex items-center gap-2 rounded-none border border-border bg-surface p-1.5 shadow-[0_12px_32px_-16px_rgba(26,26,26,0.35)]"
           >
             <label htmlFor="soon-key" className="sr-only">
-              Clave de acceso anticipado
+              Clave de la redacción
             </label>
             <input
               ref={inputRef}

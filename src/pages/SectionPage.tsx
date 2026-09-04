@@ -4,6 +4,7 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { ArticleFeed } from '../components/news/ArticleFeed';
 import { CategoryTabs } from '../components/news/CategoryTabs';
+import { Aviso } from '../components/avisos/Aviso';
 import { useArticles, useCategories } from '../hooks/useNews';
 import { usePageSeo } from '../hooks/usePageSeo';
 import { SITE_URL } from '../lib/api';
@@ -75,7 +76,9 @@ export function SectionPage() {
             )}
           </header>
 
-          <CategoryTabs categories={categories ?? []} className="mb-10" />
+          <CategoryTabs categories={categories ?? []} className="mb-8" />
+
+          <Aviso espacio="edicion-faldon" className="mb-10" />
 
           <ArticleFeed
             data={data}
@@ -84,7 +87,7 @@ export function SectionPage() {
             onRetry={reload}
             onPageChange={setPage}
             emptyTitle={`Nada en ${name} por ahora`}
-            emptyMessage="En cuanto los medios publiquen algo de esta sección, aparecerá aquí."
+            emptyMessage="Cuando los medios publiquen algo de esta sección, entrará en la edición."
           />
         </div>
       </main>

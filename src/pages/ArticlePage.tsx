@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer';
 import { ArticleCard } from '../components/news/ArticleCard';
 import { SourceCredit } from '../components/news/SourceCredit';
 import { CardSkeleton, ErrorState } from '../components/news/States';
+import { Aviso } from '../components/avisos/Aviso';
 import { useArticle, useArticles } from '../hooks/useNews';
 import { usePageSeo } from '../hooks/usePageSeo';
 import { formatDateTime, timeAgo, singleLine } from '../lib/format';
@@ -25,16 +26,16 @@ function NotFound() {
       <main className="flex-1 flex flex-col items-center justify-center text-center px-6 py-32">
         <p className="text-muted-foreground text-sm uppercase tracking-widest m-0 mb-4">404</p>
         <h1 className="font-display font-bold text-4xl text-foreground mb-4 tracking-tight">
-          Esa nota ya no está aquí
+          Esta nota salió de circulación
         </h1>
         <p className="text-muted-foreground max-w-md mb-8">
-          Puede que la hayamos retirado o que el enlace esté mal escrito.
+          Puede que se haya retirado del archivo, o que el enlace esté mal compuesto.
         </p>
         <Link
           to="/noticias"
           className="rounded-none px-7 py-3 text-sm font-semibold bg-accent text-white hover:opacity-90 transition-opacity no-underline"
         >
-          Ver todas las noticias
+          Ir a la edición
         </Link>
       </main>
       <Footer />
@@ -206,6 +207,10 @@ export function ArticlePage() {
                 {/* La salida al medio original. Es el elemento principal de la
                     página: aquí no hay más texto que leer. */}
                 <SourceCredit article={article} variant="block" className="mb-6" />
+
+                {/* El faldón de cierre: después de la salida al medio, cuando
+                    ya no queda nada que leer. */}
+                <Aviso espacio="nota-faldon" className="mt-10" />
               </article>
             )}
           </div>
@@ -239,6 +244,8 @@ export function ArticlePage() {
               Toda la edición
               <ArrowRight size={15} aria-hidden="true" />
             </Link>
+
+            <Aviso espacio="nota-columna" className="mt-10" />
           </aside>
         </div>
       </main>

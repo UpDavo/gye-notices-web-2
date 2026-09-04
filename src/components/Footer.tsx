@@ -42,8 +42,8 @@ export function Footer() {
             <ColumnTitle>El diario</ColumnTitle>
             <ul className="list-none m-0 p-0 flex flex-col gap-2">
               <li><Link to="/noticias" className={linkClass}>Toda la edición</Link></li>
-              <li><Link to="/privacidad" className={linkClass}>Privacidad</Link></li>
-              <li><Link to="/terminos" className={linkClass}>Términos</Link></li>
+              <li><Link to="/privacidad" className={linkClass}>Aviso de privacidad</Link></li>
+              <li><Link to="/terminos" className={linkClass}>Condiciones de uso</Link></li>
               {/* Contacto: un `mailto:` y nada más. No hay formulario en
                   ninguna página —no existe backend que reciba envíos—, así
                   que el colofón enlaza al correo directamente. */}

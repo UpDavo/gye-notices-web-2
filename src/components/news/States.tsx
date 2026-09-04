@@ -69,8 +69,8 @@ export function GridSkeleton({ count = 6 }: { count?: number }) {
 }
 
 export function EmptyState({
-  title = 'Todavía no hay notas aquí',
-  message = 'En cuanto los medios publiquen algo nuevo en esta sección, aparecerá en esta página.',
+  title = 'Esta sección aún no tiene material',
+  message = 'Cuando los medios publiquen algo de esta sección, entrará en la próxima edición.',
 }: {
   title?: string;
   message?: string;
@@ -93,7 +93,7 @@ export function ErrorState({ message, onRetry }: { message: string; onRetry?: ()
         <AlertTriangle className="w-6 h-6 text-accent" aria-hidden="true" />
       </div>
       <h3 className="font-display font-bold text-xl text-foreground m-0 mb-2 tracking-tight">
-        No pudimos cargar las noticias
+        No se pudo componer la edición
       </h3>
       <p className="text-sm text-muted-foreground m-0 mb-6 max-w-md mx-auto leading-relaxed">{message}</p>
       {onRetry && (
@@ -102,7 +102,7 @@ export function ErrorState({ message, onRetry }: { message: string; onRetry?: ()
           onClick={onRetry}
           className="px-7 py-2.5 text-[13px] uppercase tracking-[0.16em] bg-accent text-white hover:opacity-90 transition-opacity border-0 cursor-pointer"
         >
-          Reintentar
+          Volver a intentar
         </button>
       )}
     </div>

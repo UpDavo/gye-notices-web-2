@@ -69,7 +69,7 @@ export function Navbar() {
             <div className="flex-1 flex items-center justify-end gap-2">
               <form onSubmit={submitSearch} className="hidden lg:flex" role="search">
                 <label htmlFor="nav-search" className="sr-only">
-                  Buscar noticias
+                  Buscar en la edición
                 </label>
                 <div className="flex items-center gap-2 border border-border bg-surface px-3 py-1.5">
                   <Search size={14} className="text-muted-foreground" aria-hidden="true" />
@@ -152,7 +152,7 @@ export function Navbar() {
             <div className="px-4 py-5 flex flex-col gap-4">
               <form onSubmit={submitSearch} role="search">
                 <label htmlFor="nav-search-mobile" className="sr-only">
-                  Buscar noticias
+                  Buscar en la edición
                 </label>
                 <div className="flex items-center gap-2 border border-border bg-background px-3 py-2">
                   <Search size={15} className="text-muted-foreground" aria-hidden="true" />
@@ -161,7 +161,7 @@ export function Navbar() {
                     type="search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Buscar noticias"
+                    placeholder="Buscar en la edición"
                     className="bg-transparent border-0 outline-none text-sm w-full text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
