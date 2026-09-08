@@ -123,7 +123,7 @@ export function Navbar() {
               to="/noticias"
               className="shrink-0 text-[13px] uppercase tracking-[0.12em] text-foreground no-underline hover:text-accent transition-colors"
             >
-              Portada
+              Lo último
             </Link>
             {sections.map((category) => (
               <Link
@@ -166,6 +166,13 @@ export function Navbar() {
                   />
                 </div>
               </form>
+
+              <Link
+                to="/noticias"
+                className="text-sm uppercase tracking-[0.12em] text-foreground no-underline hover:text-accent transition-colors"
+              >
+                Lo último
+              </Link>
 
               {(categories ?? []).map((category) => (
                 <Link
