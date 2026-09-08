@@ -130,10 +130,11 @@ export function Aviso({ espacio, className = '' }: Props) {
             <span className="border border-[hsl(var(--rule))] bg-background px-4 py-1.5 text-[10px] uppercase tracking-[0.16em] group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-colors">
               {compacto ? 'Contrátelo' : 'Contrate este espacio'}
             </span>
-            {/* La medida de imprenta y el archivo que hay que entregar: es lo
-                primero que pregunta quien va a pautar. */}
+            {/* La medida de imprenta, que es la que habla el idioma del
+                anunciante local. La del archivo en píxeles se dicta por
+                correo: ver la tabla en `data/avisos.ts`. */}
             <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground/80">
-              {modulo.nombre} · {modulo.medida}{compacto ? '' : ` · ${modulo.archivo}`}
+              {modulo.nombre} · {modulo.medida}
             </span>
           </span>
         </a>

@@ -37,8 +37,6 @@ export type MedidaModulo = {
   nombre: string;
   /* Medida de imprenta: es lo que entiende el anunciante local. */
   medida: string;
-  /* Y la medida real del archivo que hay que entregar. */
-  archivo: string;
   /* Proporción del hueco. El aviso contratado la respeta siempre; el recuadro
      de espacio libre la usa como MÍNIMO y crece si su texto no cabe. Recortar
      el texto para conservar la medida exacta era el peor de los dos males: el
@@ -57,12 +55,27 @@ export type MedidaModulo = {
   compacto?: boolean;
 };
 
+/* ARCHIVO QUE HAY QUE ENTREGAR — REFERENCIA INTERNA, NO SALE EN LA EDICIÓN
+   ────────────────────────────────────────────────────────────────────────
+   La medida en píxeles del arte. Estaba en un campo `archivo` que se pintaba
+   junto a la de imprenta bajo cada recuadro libre; en la plana rompía la voz
+   del diario —«8 col × 5 cm» es el idioma de la casa, «1200 × 250 px» es el
+   de una red publicitaria— así que se guarda aquí y se dicta al anunciante
+   cuando pide el arte.
+
+     faldon         1200 × 250 px     8 col ×  5 cm
+     robapaginas     600 × 500 px     3 col × 12 cm
+     modulo          400 × 330 px     2 col ×  8 cm
+     columna         300 × 600 px     1 col × 20 cm
+     clasificado     400 × 120 px     2 col ×  3 cm
+
+   Si cambia una medida, cambia también su `proporcion` aquí abajo. */
 export const MODULOS: Record<Modulo, MedidaModulo> = {
-  faldon:      { nombre: 'Faldón',      medida: '8 col × 5 cm',  archivo: '1200 × 250 px', proporcion: 'aspect-[5/2] sm:aspect-[4/1] md:aspect-[1200/250]', minimoLibre: 'min-h-[8rem] md:min-h-[10rem]',  disposicion: 'fila' },
-  robapaginas: { nombre: 'Robapáginas', medida: '3 col × 12 cm', archivo: '600 × 500 px',  proporcion: 'aspect-[3/2] md:aspect-[600/500]',                  minimoLibre: 'min-h-[16rem] md:min-h-[20rem]', disposicion: 'apilado' },
-  modulo:      { nombre: 'Módulo',      medida: '2 col × 8 cm',  archivo: '400 × 330 px',  proporcion: 'aspect-[400/330]',                                  minimoLibre: 'min-h-[14rem]',                  disposicion: 'apilado' },
-  columna:     { nombre: 'Columna',     medida: '1 col × 20 cm', archivo: '300 × 600 px',  proporcion: 'aspect-[3/2] md:aspect-[300/600]',                  minimoLibre: 'min-h-[16rem] md:min-h-[30rem]', disposicion: 'apilado' },
-  clasificado: { nombre: 'Clasificado', medida: '2 col × 3 cm',  archivo: '400 × 120 px',  proporcion: 'aspect-[400/120]',                                  minimoLibre: 'min-h-[6.5rem]',                 disposicion: 'fila', compacto: true },
+  faldon:      { nombre: 'Faldón',      medida: '8 col × 5 cm',  proporcion: 'aspect-[5/2] sm:aspect-[4/1] md:aspect-[1200/250]', minimoLibre: 'min-h-[8rem] md:min-h-[10rem]',  disposicion: 'fila' },
+  robapaginas: { nombre: 'Robapáginas', medida: '3 col × 12 cm', proporcion: 'aspect-[3/2] md:aspect-[600/500]',                  minimoLibre: 'min-h-[16rem] md:min-h-[20rem]', disposicion: 'apilado' },
+  modulo:      { nombre: 'Módulo',      medida: '2 col × 8 cm',  proporcion: 'aspect-[400/330]',                                  minimoLibre: 'min-h-[14rem]',                  disposicion: 'apilado' },
+  columna:     { nombre: 'Columna',     medida: '1 col × 20 cm', proporcion: 'aspect-[3/2] md:aspect-[300/600]',                  minimoLibre: 'min-h-[16rem] md:min-h-[30rem]', disposicion: 'apilado' },
+  clasificado: { nombre: 'Clasificado', medida: '2 col × 3 cm',  proporcion: 'aspect-[400/120]',                                  minimoLibre: 'min-h-[6.5rem]',                 disposicion: 'fila', compacto: true },
 };
 
 export type DefinicionEspacio = {
@@ -150,7 +163,7 @@ export const AVISOS: Aviso[] = [];
 
 export function correoContratacion(definicion: DefinicionEspacio, modulo: MedidaModulo): string {
   const asunto = `Contratacion de aviso — ${modulo.nombre} (${modulo.medida})`;
-  const cuerpo = `Buenas: me interesa el espacio «${definicion.libre.titular}» — ${modulo.nombre}, ${modulo.medida} (${modulo.archivo}).`;
+  const cuerpo = `Buenas: me interesa el espacio «${definicion.libre.titular}» — ${modulo.nombre}, ${modulo.medida}.`;
   return `mailto:${environment.contactEmail}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
 }
 
